@@ -37,7 +37,12 @@
         <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
             <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource ElementWindowBrush}">
                 <Grid Margin="3">
-                    <TextBox BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Bottom" FontSize="15"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Images/LoginIcon.png"/>
+                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Bottom" FontSize="15"/>
                 </Grid>
             </Border>
         </ControlTemplate>
@@ -45,19 +50,24 @@
         <ControlTemplate x:Key="PasswordBoxLogin" TargetType="{x:Type PasswordBox}">
             <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource ElementWindowBrush}">
                 <Grid Margin="3">
-                    <PasswordBox BorderThickness="0" VerticalAlignment="Bottom" FontSize="15"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="Images/PasswordIcon.png"/>
+                    <PasswordBox Grid.Column="1" BorderThickness="0" VerticalAlignment="Bottom" FontSize="15"/>
                 </Grid>
             </Border>
         </ControlTemplate>
 
         <Style TargetType="Border" x:Key="Top">
             <Setter Property="Background" Value="White"/>
-            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Opacity" Value="0.3"/>
             <Setter Property="CornerRadius" Value="10,10,0,0"/>
         </Style>
         <Style TargetType="Border" x:Key="Bottom">
             <Setter Property="Background" Value="White"/>
-            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Opacity" Value="0.2"/>
             <Setter Property="CornerRadius" Value="0,0,10,10"/>
         </Style>
 
