@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageWPF"
         mc:Ignorable="d"
+        Style="{StaticResource  DefaultWindow}"
         Title="MainWindow" Height="400" Width="400">
-    <Border>
+    <Border Style="{StaticResource DefaultBorder}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
