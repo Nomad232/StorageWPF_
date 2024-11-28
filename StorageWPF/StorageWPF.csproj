@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\Logo\logo_transparent.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Logo\logo_transparent.png" />
+  </ItemGroup>
+
 </Project>
