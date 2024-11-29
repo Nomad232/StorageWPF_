@@ -1,0 +1,102 @@
+﻿<Window x:Class="StorageWPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StorageWPF.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource DefaultWindow}"
+        Title="MainWindow" Height="600" Width="1000">
+
+    <Window.Resources>
+        <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+               TargetType="RadioButton"
+               x:Key="RadioButtonMenu">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  Background="{TemplateBinding Background}"
+                                  Margin="0,0,0,5">
+                                <Grid.Effect>
+                                    <DropShadowEffect Color="{StaticResource DarkWater}" BlurRadius="5" ShadowDepth="3" Direction="290" Opacity="0.4" />
+                                </Grid.Effect>
+
+                                <TextBlock Text="{TemplateBinding Property=Content}"
+                                           FontSize="17"
+                                           Foreground="{StaticResource ElementWindowBrush}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="{StaticResource BackgroundWindowBrush}"/>
+                <Setter Property="Background" Value="#FFC3DEF7"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#FFB4D6F5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    
+    <Border Style="{StaticResource Main}" Background="{StaticResource GradientBrushForMain}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="16*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Top}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox HorizontalAlignment="Left" Margin="5,0,0,0">
+                        <TextBlock Text="Main"/>
+                    </Viewbox>
+                    <UniformGrid Grid.Column="2" Columns="2" Margin="0,0,0,0">
+                        <Button Content="-" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Content="X" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" CornerRadius="10,0,0,0">
+                <Viewbox>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="../Images/Logo/logo_transparent.png" RenderTransformOrigin="-0.115,0.535"/>
+                </Viewbox>
+            </Border>
+
+            <Border Grid.Row="2" CornerRadius="0,0,0,10">
+                <StackPanel Margin="0">
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Margin="5,5,5,5" CornerRadius="0,0,10,0" Grid.RowSpan="2" Grid.Column="1" BorderBrush="{StaticResource ElementWindowBrush}" BorderThickness="1">
+                <Frame Background="#FFB4D6F5">
+                    
+                </Frame>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>
