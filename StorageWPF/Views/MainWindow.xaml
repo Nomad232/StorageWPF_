@@ -22,7 +22,7 @@
                                   Background="{TemplateBinding Background}"
                                   Margin="0,0,0,5">
                                 <Grid.Effect>
-                                    <DropShadowEffect Color="{StaticResource DarkWater}" BlurRadius="5" ShadowDepth="5" Direction="290" Opacity="0.4" />
+                                    <DropShadowEffect Color="{StaticResource DarkWater}" BlurRadius="5" ShadowDepth="3" Direction="290" Opacity="0.4" />
                                 </Grid.Effect>
 
                                 <TextBlock Text="{TemplateBinding Property=Content}"
@@ -35,12 +35,12 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground" Value="{StaticResource BackgroundWindowBrush}"/>
-                <Setter Property="Background" Value="#FFAED4F9"/>
+                <Setter Property="Background" Value="#FFC3DEF7"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Style.Setters>
             <Style.Triggers>
                 <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Background" Value="#FF93C5F5"/>
+                    <Setter Property="Background" Value="#FFB4D6F5"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -54,8 +54,8 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="4*"/>
                 <RowDefinition Height="15*"/>
             </Grid.RowDefinitions>
 
@@ -83,16 +83,16 @@
             </Border>
 
             <Border Grid.Row="2" CornerRadius="0,0,0,10">
-                <StackPanel Margin="5">
-                    <RadioButton Height="50" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Height="50" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Height="50" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Height="50" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                <StackPanel Margin="0">
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Height="50" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
                 </StackPanel>
             </Border>
 
-            <Border Grid.Row="1" CornerRadius="0,0,10,0" Grid.RowSpan="2" Grid.Column="1">
-                <Frame>
+            <Border Grid.Row="1" Margin="5,5,5,5" CornerRadius="0,0,10,0" Grid.RowSpan="2" Grid.Column="1" BorderBrush="{StaticResource ElementWindowBrush}" BorderThickness="1">
+                <Frame Background="#FFB4D6F5">
                     
                 </Frame>
             </Border>
