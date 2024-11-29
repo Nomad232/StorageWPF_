@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource DefaultWindow}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
 
     <Window.Resources>
         <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
@@ -54,7 +54,7 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="16*"/>
             </Grid.RowDefinitions>
