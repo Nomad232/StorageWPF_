@@ -11,8 +11,19 @@
 
         <LinearGradientBrush x:Key="AnimatedBrush" StartPoint="0,0" EndPoint="1,0">
             <GradientStop Color="#FFA0CCF3" Offset="0" />
+            <GradientStop Color="{StaticResource DefaultWhite}" Offset="0.5" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="GradientBrushForMain" StartPoint="0,0" EndPoint="1,5">
+            <GradientStop Color="#FFCBE3F9" Offset="0" />
             <GradientStop Color="{StaticResource DefaultWhite}" Offset="1" />
         </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="GradientBrushForButtons" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#FFC2DEF7" Offset="0" />
+            <GradientStop Color="{StaticResource DarkWater}" Offset="1" />
+        </LinearGradientBrush>
+
 
         <Style TargetType="Border" x:Key="Login">
             <Setter Property="Background" Value="{StaticResource AnimatedBrush}" />
@@ -33,6 +44,11 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="Border" x:Key="Main">
+            <Setter Property="Background" Value="{StaticResource BackgroundWindowBrush}" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
 
         <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
             <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource ElementWindowBrush}">
@@ -46,7 +62,6 @@
                 </Grid>
             </Border>
         </ControlTemplate>
-
         <ControlTemplate x:Key="PasswordBoxLogin" TargetType="{x:Type PasswordBox}">
             <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource ElementWindowBrush}">
                 <Grid Margin="3">

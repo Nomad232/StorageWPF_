@@ -119,15 +119,15 @@
                     <Viewbox>
                         <TextBlock Text="Login"/>
                     </Viewbox>
-                    <UniformGrid Grid.Column="2" Columns="2">
-                        <Button Content="-" Background="Transparent" BorderThickness="0"/>
-                        <Button Content="X" Background="Transparent" BorderThickness="0"/>
+                    <UniformGrid Grid.Column="2" Columns="2" Margin="0,0,0,0">
+                        <Button Content="-" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Content="X" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
                     </UniformGrid>
                 </Grid>
             </Border>
 
             <Viewbox Grid.Row="1">
-                <Image RenderOptions.BitmapScalingMode="HighQuality" Source="../../Images/Logo/logo_transparent.png"/>
+                <Image RenderOptions.BitmapScalingMode="HighQuality" Source="../Images/Logo/logo_transparent.png"/>
             </Viewbox>
 
             <Grid Grid.Row="2" Margin="10">
@@ -140,7 +140,7 @@
 
                 <TextBlock Text="Log In" FontSize="45" Style="{StaticResource BackgroundWhite}" VerticalAlignment="Top">
                     <TextBlock.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="4" Direction="290" Opacity="0.4" />
+                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="3" Direction="290" Opacity="0.4" />
                     </TextBlock.Effect>
                 </TextBlock>
 
