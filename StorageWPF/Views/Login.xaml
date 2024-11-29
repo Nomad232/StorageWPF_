@@ -21,9 +21,9 @@
         
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF415B79"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF06989A"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF506C8C"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF07B6B9"/>
         <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
@@ -97,14 +97,68 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="TextBlock" x:Key="LogIn">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Roboto"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#364f6b"/>
+        </Style>
+
+        <Style TargetType="Border" x:Key="Login">
+            <Setter Property="Background" Value="{StaticResource AnimatedBrush}" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <ColorAnimation 
+                    Storyboard.TargetProperty="(Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                    From="{StaticResource DefaultWhite}" To="#FFBCE5E6" Duration="0:0:4" />
+                            <ColorAnimation 
+                    Storyboard.TargetProperty="(Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"
+                    From="{StaticResource DefaultWhite}" To="#FFBCE5E6" Duration="0:0:4" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
+            <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoginIcon.png"/>
+                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Bottom" FontSize="16"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="PasswordBoxLogin" TargetType="{x:Type PasswordBox}">
+            <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/PasswordIcon.png"/>
+                    <PasswordBox Grid.Column="1" BorderThickness="0" VerticalAlignment="Bottom" FontSize="16"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
     </Window.Resources>
     
     <Border Style="{StaticResource Login}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="12*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="13*"/>
                 <RowDefinition Height="1*"/>
 
             </Grid.RowDefinitions>
@@ -127,7 +181,8 @@
             </Border>
 
             <Viewbox Grid.Row="1">
-                <Image RenderOptions.BitmapScalingMode="HighQuality" Source="../Images/Logo/logo_transparent.png"/>
+                <Image RenderOptions.BitmapScalingMode="HighQuality" 
+                       Source="../Images/Logo/logo_transparent.png"/>
             </Viewbox>
 
             <Grid Grid.Row="2" Margin="10">
@@ -138,20 +193,29 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Log In" FontSize="45" Style="{StaticResource BackgroundWhite}" VerticalAlignment="Top">
+                <TextBlock Text="Log In" FontSize="45" Style="{StaticResource LogIn}" VerticalAlignment="Top">
                     <TextBlock.Effect>
-                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="3" Direction="290" Opacity="0.4" />
+                        <DropShadowEffect Color="Black" 
+                                          BlurRadius="5" 
+                                          ShadowDepth="3" 
+                                          Direction="290" 
+                                          Opacity="0.4" />
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <TextBox Template="{StaticResource TextBoxLogin}" Grid.Row="1" Margin="7" Text="Email"/>
-
-                <PasswordBox Template="{StaticResource PasswordBoxLogin }" Grid.Row="2" Margin="7"/>
-
-                <Button Style="{StaticResource LoginButton}" Grid.Row="3" Margin="5,5,5,20" Content="Log in" Background="{StaticResource ElementWindowBrush}"/>
+                <TextBox Template="{StaticResource TextBoxLogin}"
+                         Grid.Row="1" 
+                         Margin="7" Text="Email"/>
+                <PasswordBox Template="{StaticResource PasswordBoxLogin }"
+                             Grid.Row="2" 
+                             Margin="7"/>
+                <Button Style="{StaticResource LoginButton}"
+                        Grid.Row="3"
+                        Margin="5,5,5,20" 
+                        Content="Log in" 
+                        Background="{StaticResource ElementWindowBrush}"/>
 
             </Grid>
-
             <Border Grid.Row="4" Style="{StaticResource Bottom}"/>
         </Grid>
     </Border>
