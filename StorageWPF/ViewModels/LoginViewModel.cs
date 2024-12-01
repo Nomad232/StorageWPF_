@@ -1,4 +1,5 @@
 ﻿using StorageWPF.Models;
+using StorageWPF.Views;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -15,16 +16,13 @@ namespace StorageWPF.ViewModels
 
         public LoginViewModel()
         {
-            using (FileStream f = new FileStream("Users.xml", FileMode.OpenOrCreate))
-            {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<User>));
-                _users = (ObservableCollection<User>)xmlSerializer.Deserialize(f);
-            }
+            // Тут проблема с путем
+            _users = JsonUtils.FromJsonFile<ObservableCollection<User>>("../../../Data/Users.json");
         }
 
         public string Username
         {
-            get { return _username; }
+            get => _username;
             set => Set(ref _username, value);
         }
         public string Password
@@ -41,7 +39,7 @@ namespace StorageWPF.ViewModels
                 return loginCommand ??
                   (loginCommand = new RelayCommand(obj =>
                   {
-                      User user = new User(Username, Password);
+                      User user = new User(_username, _password);
                       if (_users.Contains(user))
                       {
                           MainWindow mainWindow = new MainWindow();
@@ -75,7 +73,7 @@ namespace StorageWPF.ViewModels
                 return closeCommand ??
                     (closeCommand = new RelayCommand(obj =>
                     {
-                        if(obj is Window window)
+                        if (obj is Window window)
                         {
                             window.Close();
                         }
@@ -110,7 +108,7 @@ namespace StorageWPF.ViewModels
                             if (Mouse.LeftButton == MouseButtonState.Pressed)
                             {
                                 window.DragMove();
-                            }             
+                            }
                         }
                     }));
             }
