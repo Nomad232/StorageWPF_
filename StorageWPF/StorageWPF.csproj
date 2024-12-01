@@ -31,8 +31,4 @@
     <Resource Include="Images\UserWhiteIcon.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

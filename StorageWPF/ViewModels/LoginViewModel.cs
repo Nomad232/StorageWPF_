@@ -16,10 +16,14 @@ namespace StorageWPF.ViewModels
 
         public LoginViewModel()
         {
-            using (FileStream f = new FileStream("../../../Data/Users.xml", FileMode.OpenOrCreate))
+            try
             {
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<User>));
-                _users = (ObservableCollection<User>)xmlSerializer.Deserialize(f);
+                _users = JsonUtils.FromJsonFile<ObservableCollection<User>>("../../../Data/Users.json");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Файл User.json відсутній або пустий");
+                Application.Current.Shutdown();
             }
         }
 
@@ -76,7 +80,7 @@ namespace StorageWPF.ViewModels
                 return closeCommand ??
                     (closeCommand = new RelayCommand(obj =>
                     {
-                        if(obj is Window window)
+                        if (obj is Window window)
                         {
                             window.Close();
                         }
@@ -111,7 +115,7 @@ namespace StorageWPF.ViewModels
                             if (Mouse.LeftButton == MouseButtonState.Pressed)
                             {
                                 window.DragMove();
-                            }             
+                            }
                         }
                     }));
             }
