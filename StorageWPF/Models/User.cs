@@ -1,39 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace StorageWPF.Model
+namespace StorageWPF.Models
 {
     public class User : INotifyPropertyChanged
     {
-        private string username;
-        private string password;
+        private string _username;
+        private string _password;
 
         public User() { }
         public User(string username, string password)
         {
-            this.username = username;
-            this.password = password;
+            _username = username;
+            _password = password;
         }
 
         public string Username
         {
-            get { return username; }
+            get { return _username; }
             set
             {
-                username = value;
+                _username = value;
                 NotifyPropertyChanged("Username");
             }
         }
         public string Password
         {
-            get { return password; }
+            get { return _password; }
             set
             {
-                password = value;
+                _password = value;
                 NotifyPropertyChanged("Password");
             }
         }

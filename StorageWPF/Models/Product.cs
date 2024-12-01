@@ -1,61 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace StorageWPF.Model
+namespace StorageWPF.Models
 {
     public class Product : INotifyPropertyChanged
     {
-        private string name;
-        private double price;
-        private int count;
-        private Units_Of_Measurement um;
+        private string _name;
+        private double _price;
+        private int _count;
+        private Units_Of_Measurement _um;
 
         public string Name
         {
-            get { return name; }
-            set 
-            { 
-                name = value; 
+            get { return _name; }
+            set
+            {
+                _name = value;
                 NotifyPropertyChanged("Name");
             }
         }
         public double Price
         {
-            get { return price; }
-            set 
-            { 
-                price = value; 
+            get { return _price; }
+            set
+            {
+                _price = value;
                 NotifyPropertyChanged("Price");
                 NotifyPropertyChanged("Sum");
             }
         }
         public int Count
         {
-            get { return count; }
-            set 
-            { 
-                count = value; 
+            get { return _count; }
+            set
+            {
+                _count = value;
                 NotifyPropertyChanged("Count");
                 NotifyPropertyChanged("Sum");
             }
         }
         public Units_Of_Measurement UM
         {
-            get { return um; }
+            get { return _um; }
             set
             {
-                um = value;
+                _um = value;
                 NotifyPropertyChanged("UM");
 
             }
         }
 
-        public double Sum
-            { get { return price * count; } }
+        public double Sum => _price * _count;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string info)

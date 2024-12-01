@@ -1,14 +1,9 @@
-﻿using StorageWPF.Model;
-using System;
-using System.Collections.Generic;
+﻿using StorageWPF.Models;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace StorageWPF.ViewModel
+namespace StorageWPF.ViewModels
 {
     internal class StorageViewModel : ViewModel
     {
