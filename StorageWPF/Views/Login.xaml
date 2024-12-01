@@ -180,8 +180,19 @@
                         <TextBlock Text="Login" Foreground="Black"/>
                     </Viewbox>
                     <UniformGrid Grid.Column="2" Columns="2" Margin="0,0,0,0">
-                        <Button Content="-" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
-                        <Button Content="X" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Content="-" 
+                                Command="{Binding MinimizeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Padding="0" FontSize="15"
+                                Background="Transparent" 
+                                BorderThickness="0"/>
+                        <Button Content="X" 
+                                Padding="0" 
+                                Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                FontSize="15" 
+                                Background="Transparent"
+                                BorderThickness="0"/>
                     </UniformGrid>
                 </Grid>
             </Border>
@@ -217,6 +228,7 @@
                              Margin="7"/>
                 <Button Style="{StaticResource LoginButton}"
                         Grid.Row="3"
+                        Command="{Binding LoginCommand}"
                         Margin="5,5,5,20" 
                         Content="Submit" 
                         Background="{StaticResource ElementWindowBrush}"/>
