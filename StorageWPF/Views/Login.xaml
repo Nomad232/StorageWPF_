@@ -221,6 +221,7 @@
                 </TextBlock>
 
                 <TextBox Template="{StaticResource TextBoxLogin}"
+                         x:Name="LoginBox"
                          Grid.Row="1" 
                          Margin="7" Text="Email"/>
                 <PasswordBox Template="{StaticResource PasswordBoxLogin }"
