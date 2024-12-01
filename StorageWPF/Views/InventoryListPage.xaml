@@ -1,0 +1,78 @@
+﻿<Page x:Class="StorageWPF.Views.InventoryListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StorageWPF.Views"
+      xmlns:model="clr-namespace:StorageWPF.Models"
+      mc:Ignorable="d" 
+      d:DesignHeight="485" d:DesignWidth="765"
+      Title="InventoryListPage">
+
+    <Page.Resources>
+        <ControlTemplate x:Key="SerchBox" TargetType="TextBox">
+            <Border Background="White"  CornerRadius="10" Opacity="0.6" BorderThickness="0,0,0,1.5" BorderBrush="{StaticResource DarkWaterBrush}">
+                <Grid Margin="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoupeIcon.png"/>
+                    <TextBox Grid.Column="1" Padding="0" BorderThickness="0" VerticalAlignment="Center" FontSize="16" Margin="5,0,0,0"/>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="{StaticResource ElementWindowBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource BackgroundWindowBrush}" />
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+
+            <Border Background="{StaticResource BackgroundWindowBrush}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border>
+                        <TextBox Template="{StaticResource SerchBox}" Margin="10"/>
+                    </Border>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock Text="Filter:" FontSize="25"/>
+                        <ComboBox Width="120" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" TextBlock.FontSize="20">
+                            <ComboBoxItem Content="Unit"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <ListView Grid.Row="1"  Name="MyListView" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding}" Width="151" />
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding}" Width="151" />
+                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding}" Width="150" />
+                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding}" Width="150" />
+                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding}" Width="150" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
+</Page>

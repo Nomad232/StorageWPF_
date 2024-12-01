@@ -5,12 +5,14 @@
              StartupUri="Views/Login.xaml">
     <Application.Resources>
         <Color x:Key="DefaultWhite">#f0f0f0</Color>
+        <Color x:Key="BlueGray">#FFD2DEDA</Color>
         <Color x:Key="DarkWater">#364f6b</Color>
         <Color x:Key="Green_">#008789</Color>
         
         <SolidColorBrush x:Key="DarkWaterBrush" Color="{StaticResource DarkWater}"/>
         <SolidColorBrush x:Key="BackgroundWindowBrush" Color="{StaticResource DefaultWhite}"/>
         <SolidColorBrush x:Key="ElementWindowBrush" Color="{StaticResource Green_}"/>
+        <SolidColorBrush x:Key="ListBrush" Color="{StaticResource BlueGray}"/>
 
         <LinearGradientBrush x:Key="AnimatedBrush" StartPoint="0,0" EndPoint="1,0">
             <GradientStop Color="#FFA0CCF3" Offset="0" />
