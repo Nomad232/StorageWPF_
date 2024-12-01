@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace StorageWPF.ViewModels
@@ -35,7 +36,6 @@ namespace StorageWPF.ViewModels
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
         {
-            set { loginCommand = value; }
             get
             {
                 return loginCommand ??
@@ -56,7 +56,6 @@ namespace StorageWPF.ViewModels
         private RelayCommand guestCommand;
         public RelayCommand GuestCommand
         {
-            set { guestCommand = value; }
             get
             {
                 return guestCommand ??
@@ -65,6 +64,54 @@ namespace StorageWPF.ViewModels
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.DataContext = new StorageViewModel(false);
                         mainWindow.Show();
+                    }));
+            }
+        }
+        private RelayCommand closeCommand;
+        public RelayCommand CloseCommand
+        {
+            get
+            {
+                return closeCommand ??
+                    (closeCommand = new RelayCommand(obj =>
+                    {
+                        if(obj is Window window)
+                        {
+                            window.Close();
+                        }
+                    }));
+            }
+        }
+        private RelayCommand minimizeCommand;
+        public RelayCommand MinimizeCommand
+        {
+            get
+            {
+                return minimizeCommand ??
+                    (minimizeCommand = new RelayCommand(obj =>
+                    {
+                        if (obj is Window window)
+                        {
+                            window.WindowState = WindowState.Minimized;
+                        }
+                    }));
+            }
+        }
+        private RelayCommand dragCommand;
+        public RelayCommand DragCommand
+        {
+            get
+            {
+                return dragCommand ??
+                    (dragCommand = new RelayCommand(obj =>
+                    {
+                        if (obj is Window window)
+                        {
+                            if (Mouse.LeftButton == MouseButtonState.Pressed)
+                            {
+                                window.DragMove();
+                            }             
+                        }
                     }));
             }
         }
