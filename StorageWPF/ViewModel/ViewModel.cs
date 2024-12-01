@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StorageWPF.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace StorageWPF.ViewModel
 {
     internal class ViewModel : INotifyPropertyChanged
-    {
+    { 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
