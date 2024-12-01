@@ -1,4 +1,5 @@
 ﻿using StorageWPF.Models;
+using StorageWPF.Views;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace StorageWPF.ViewModels
 
         public LoginViewModel()
         {
-            using (FileStream f = new FileStream("Users.xml", FileMode.OpenOrCreate))
+            using (FileStream f = new FileStream("../../../Data/Users.xml", FileMode.OpenOrCreate))
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<User>));
                 _users = (ObservableCollection<User>)xmlSerializer.Deserialize(f);
