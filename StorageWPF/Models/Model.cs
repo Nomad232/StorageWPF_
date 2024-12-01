@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StorageWPF.Models
 {
-    internal abstract class Model : INotifyPropertyChanged
+    public abstract class Model : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

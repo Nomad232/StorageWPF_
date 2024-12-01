@@ -2,7 +2,7 @@
 
 namespace StorageWPF.Models
 {
-    public class Product : INotifyPropertyChanged
+    public class Product : Model
     {
         private string _name;
         private double _price;
@@ -11,21 +11,16 @@ namespace StorageWPF.Models
 
         public string Name
         {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                NotifyPropertyChanged("Name");
-            }
+            get => _name;
+            set => Set(ref _name, value);
         }
         public double Price
         {
-            get { return _price; }
+            get => _price;
             set
             {
-                _price = value;
-                NotifyPropertyChanged("Price");
-                NotifyPropertyChanged("Sum");
+                Set(ref _price, value);
+                OnPropertyChanged("Sum");
             }
         }
         public int Count
@@ -33,28 +28,15 @@ namespace StorageWPF.Models
             get { return _count; }
             set
             {
-                _count = value;
-                NotifyPropertyChanged("Count");
-                NotifyPropertyChanged("Sum");
+                Set(ref _count, value);
+                OnPropertyChanged("Sum");
             }
         }
         public Units_Of_Measurement UM
         {
-            get { return _um; }
-            set
-            {
-                _um = value;
-                NotifyPropertyChanged("UM");
-
-            }
+            get => _um;
+            set => Set(ref _um, value);
         }
-
         public double Sum => _price * _count;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string info)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
-        }
     }
 }

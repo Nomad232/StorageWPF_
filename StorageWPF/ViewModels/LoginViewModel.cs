@@ -24,19 +24,12 @@ namespace StorageWPF.ViewModels
         public string Username
         {
             get { return _username; }
-            set
-            {
-                _username = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _username, value);
         }
         public string Password
         {
-            get { return _password; }
-            set
-            {
-                _password = value; OnPropertyChanged();
-            }
+            get => _password;
+            set => Set(ref _password, value);
         }
 
         private RelayCommand loginCommand;

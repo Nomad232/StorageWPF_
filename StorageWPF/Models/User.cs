@@ -2,7 +2,7 @@
 
 namespace StorageWPF.Models
 {
-    public class User : INotifyPropertyChanged
+    public class User : Model
     {
         private string _username;
         private string _password;
@@ -16,27 +16,13 @@ namespace StorageWPF.Models
 
         public string Username
         {
-            get { return _username; }
-            set
-            {
-                _username = value;
-                NotifyPropertyChanged("Username");
-            }
+            get => _username;
+            set => Set(ref _username, value);
         }
         public string Password
         {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                NotifyPropertyChanged("Password");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string info)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
+            get => _password; 
+            set => Set(ref _password, value);
         }
     }
 }
