@@ -10,7 +10,7 @@ namespace StorageWPF.ViewModels
 {
     internal class GeneralViewModel: ViewModel
     {
-        public ObservableCollection<Product> Products { get; }
+        public ObservableCollection<Product> Products { get; set; }
         public GeneralViewModel(ObservableCollection<Product> Products)
         {
             this.Products = Products;
