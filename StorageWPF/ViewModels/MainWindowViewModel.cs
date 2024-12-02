@@ -55,17 +55,17 @@ namespace StorageWPF.ViewModels
         {
             switch (page)
             {
-                case "General":
+                case "General info":
                     //CurrentPage =
                         break;
-                case "Inventory":
+                case "Inventory list":
                     CurrentPage = new InventoryListPage();
                     break;
-                case "Delivery":
+                case "Delivery note":
                     CurrentPage = new DeliveryNotePage();
                     break;
-                case "Expense":
-                    //CurrentPage = new 
+                case "Expense invoice":
+                    CurrentPage = new ExpenseInvoicePage();
                     break;
             }
         }
