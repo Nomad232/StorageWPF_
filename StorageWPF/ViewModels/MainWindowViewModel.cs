@@ -11,11 +11,15 @@ using System.Collections.ObjectModel;
 
 namespace StorageWPF.ViewModels
 {
-    class MainWindowViewModel : ViewModel
+    internal class MainWindowViewModel : ViewModel
     {
         public bool IsGuest { get; }
         public string Name { get;}
         public ObservableCollection<Product> Products { get; set; }
+
+        public MainWindowViewModel()
+        {
+        }
 
         public MainWindowViewModel(bool isGuest, string name)
         {
@@ -23,7 +27,7 @@ namespace StorageWPF.ViewModels
             Name = name;
             //Products з файлу
         }
-        
+
 
         //знач за замовч General
         private Page _currentPage;
@@ -51,17 +55,17 @@ namespace StorageWPF.ViewModels
         {
             switch (page)
             {
-                case "General":
+                case "General info":
                     //CurrentPage =
                         break;
-                case "Inventory":
+                case "Inventory list":
                     CurrentPage = new InventoryListPage();
                     break;
-                case "Delivery":
+                case "Delivery note":
                     CurrentPage = new DeliveryNotePage();
                     break;
-                case "Expense":
-                    //CurrentPage = new 
+                case "Expense invoice":
+                    CurrentPage = new ExpenseInvoicePage();
                     break;
             }
         }

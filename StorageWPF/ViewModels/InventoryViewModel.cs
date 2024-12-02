@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StorageWPF.ViewModels
 {
-    class InventoryViewModel : ViewModel
+    internal class InventoryViewModel : ViewModel
     {
         private string search;
         private ObservableCollection<Product> List { get; set; }

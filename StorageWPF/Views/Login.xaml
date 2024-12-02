@@ -43,33 +43,8 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
-
-        <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
-            <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
-                <Grid Margin="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="10*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoginIcon.png"/>
-                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
-                </Grid>
-            </Border>
-        </ControlTemplate>
-        <ControlTemplate x:Key="PasswordBoxLogin" TargetType="{x:Type PasswordBox}">
-            <Border Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
-                <Grid Margin="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="10*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/PasswordIcon.png"/>
-                    <PasswordBox Grid.Column="1" BorderThickness="0" VerticalAlignment="Center" FontSize="16"/>
-                </Grid>
-            </Border>
-        </ControlTemplate>
     </Window.Resources>
-    
+
     <Border Style="{StaticResource Login}">
         <Grid>
             <Grid.RowDefinitions>
@@ -131,20 +106,35 @@
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <TextBox Template="{StaticResource TextBoxLogin}"
-                         x:Name="LoginBox"
-                         Grid.Row="1" 
-                         Margin="7" Text="Email"/>
-                <PasswordBox Template="{StaticResource PasswordBoxLogin }"
-                             Grid.Row="2" 
-                             Margin="7"/>
+                <Border Grid.Row="1" Margin="7" Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                    <Grid Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoginIcon.png"/>
+                        <TextBox Grid.Column="1" Text="{Binding Username}" BorderThickness="0.8" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                    </Grid>
+                </Border>
+
+                <Border Margin="7" Grid.Row="2" Background="White" Opacity="0.6" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                    <Grid Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/PasswordIcon.png"/>
+                        <PasswordBox x:Name="UserPasswordBox" Grid.Column="1" BorderThickness="0.8" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                    </Grid>
+                </Border>
+
                 <Button Style="{StaticResource LoginButton}"
                         Grid.Row="3"
                         Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=UserPasswordBox}"
                         Margin="5,5,5,20" 
                         Content="Submit" 
                         Background="{StaticResource ElementWindowBrush}"/>
-
             </Grid>
             <Border Grid.Row="4" Style="{StaticResource Bottom}"/>
         </Grid>
