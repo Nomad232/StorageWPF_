@@ -19,32 +19,6 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-
-        <ControlTemplate x:Key="TextBoxCustom" TargetType="{x:Type TextBox}">
-            <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="8*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="{TemplateBinding Tag}" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
-                </Grid>
-            </Border>
-        </ControlTemplate>
-
-        <ControlTemplate x:Key="CustomCombobox" TargetType="{x:Type TextBox}">
-            <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="8*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="{TemplateBinding Tag}" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                    <ComboBox Grid.Column="1"/>
-                </Grid>
-            </Border>
-        </ControlTemplate>
     </Page.Resources>
 
     <Border>
@@ -69,11 +43,47 @@
 
             <Border Grid.Column="1" BorderThickness="2,0,0,0" BorderBrush="{StaticResource ElementWindowBrush}" Background="{StaticResource DarkWaterBrush}">
                 <Grid>
-                    <StackPanel Margin="5" >
-                        <TextBox Tag="Name:" Template="{StaticResource TextBoxCustom}"/>
-                        <TextBox Tag="Price:" Template="{StaticResource TextBoxCustom}"/>
-                        <TextBox Tag="Count:" Template="{StaticResource TextBoxCustom}"/>
-                        <TextBox Tag="Unit:" Template="{StaticResource CustomCombobox}"/>
+                    <StackPanel Margin="5">
+                        <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                            <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Name:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
+                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </Border>
+                        <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                            <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Price:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
+                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </Border>
+                        <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                            <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Count:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
+                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                            </Grid>
+                        </Border>
+                        <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
+                            <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Unit:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
+                                <ComboBox Grid.Column="1"/>
+                            </Grid>
+                        </Border>
                         <UniformGrid Columns="2" Height="50">
                             <Button Margin="6" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                             <Button Margin="6" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
