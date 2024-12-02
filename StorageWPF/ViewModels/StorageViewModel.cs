@@ -22,54 +22,7 @@ namespace StorageWPF.ViewModels
             }
         }
 
-        private RelayCommand closeCommand;
-        public RelayCommand CloseCommand
-        {
-            get
-            {
-                return closeCommand ??
-                    (closeCommand = new RelayCommand(obj =>
-                    {
-                        if (obj is Window window)
-                        {
-                            window.Close();
-                        }
-                    }));
-            }
-        }
-        private RelayCommand minimizeCommand;
-        public RelayCommand MinimizeCommand
-        {
-            get
-            {
-                return minimizeCommand ??
-                    (minimizeCommand = new RelayCommand(obj =>
-                    {
-                        if (obj is Window window)
-                        {
-                            window.WindowState = WindowState.Minimized;
-                        }
-                    }));
-            }
-        }
-        private RelayCommand dragCommand;
-        public RelayCommand DragCommand
-        {
-            get
-            {
-                return dragCommand ??
-                    (dragCommand = new RelayCommand(obj =>
-                    {
-                        if (obj is Window window)
-                        {
-                            if (Mouse.LeftButton == MouseButtonState.Pressed)
-                            {
-                                window.DragMove();
-                            }
-                        }
-                    }));
-            }
-        }
+        
 
         //RelayCommand addCommand;
         //public RelayCommand AddCommand

@@ -1,103 +1,20 @@
-﻿<Window x:Class="StorageWPF.MainWindow"
+﻿<Window x:Class="StorageWPF.Views.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StorageWPF"
+        xmlns:local="clr-namespace:StorageWPF.Views"
+        xmlns:vm="clr-namespace:StorageWPF.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource  DefaultWindow}"
         Title="MainWindow" Height="400" Width="350">
+
+    <Window.DataContext>
+        <vm:LoginViewModel/>
+    </Window.DataContext>
+
     <Window.Resources>
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF06989A"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF07B6B9"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-        <Style x:Key="LoginButton" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <!-- Основная граница кнопки -->
-                            <Border 
-                        x:Name="border" 
-                        CornerRadius="12" 
-                        Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        SnapsToDevicePixels="true">
-
-                                <!-- Применение DropShadowEffect -->
-                                <Border.Effect>
-                                    <DropShadowEffect 
-                                    Color="Black" 
-                                    BlurRadius="10" 
-                                    ShadowDepth="5" 
-                                     Direction="270"
-                                    Opacity="0.4" />
-                                </Border.Effect>
-                            </Border>
-
-                            <!-- Прозрачный текст -->
-                            <Border>
-                                <TextBlock 
-                                        Text="{TemplateBinding Content}" 
-                                        FontSize="{TemplateBinding FontSize}" 
-                                        FontWeight="DemiBold" 
-                                        HorizontalAlignment="Center" 
-                                        Foreground="White"
-                                        VerticalAlignment="Center" />
-                            </Border>
-                        </Grid>
-
-                        <!-- Триггеры -->
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="border" Value="{StaticResource Button.Disabled.Foreground}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style TargetType="TextBlock" x:Key="LogIn">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -135,7 +52,7 @@
                         <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoginIcon.png"/>
-                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Bottom" FontSize="16"/>
+                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
                 </Grid>
             </Border>
         </ControlTemplate>
@@ -147,7 +64,7 @@
                         <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/PasswordIcon.png"/>
-                    <PasswordBox Grid.Column="1" BorderThickness="0" VerticalAlignment="Bottom" FontSize="16"/>
+                    <PasswordBox Grid.Column="1" BorderThickness="0" VerticalAlignment="Center" FontSize="16"/>
                 </Grid>
             </Border>
         </ControlTemplate>
@@ -174,8 +91,19 @@
                         <TextBlock Text="Login" Foreground="Black"/>
                     </Viewbox>
                     <UniformGrid Grid.Column="2" Columns="2" Margin="0,0,0,0">
-                        <Button Content="-" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
-                        <Button Content="X" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Content="-" 
+                                Command="{Binding MinimizeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Padding="0" FontSize="15"
+                                Background="Transparent" 
+                                BorderThickness="0"/>
+                        <Button Content="X" 
+                                Padding="0" 
+                                Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                FontSize="15" 
+                                Background="Transparent"
+                                BorderThickness="0"/>
                     </UniformGrid>
                 </Grid>
             </Border>
@@ -204,6 +132,7 @@
                 </TextBlock>
 
                 <TextBox Template="{StaticResource TextBoxLogin}"
+                         x:Name="LoginBox"
                          Grid.Row="1" 
                          Margin="7" Text="Email"/>
                 <PasswordBox Template="{StaticResource PasswordBoxLogin }"
@@ -211,6 +140,7 @@
                              Margin="7"/>
                 <Button Style="{StaticResource LoginButton}"
                         Grid.Row="3"
+                        Command="{Binding LoginCommand}"
                         Margin="5,5,5,20" 
                         Content="Submit" 
                         Background="{StaticResource ElementWindowBrush}"/>

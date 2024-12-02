@@ -8,6 +8,7 @@ namespace StorageWPF.Models
         private double _price;
         private int _count;
         private Units_Of_Measurement _um;
+        private DateTime Date = DateTime.Now;
 
         public string Name
         {
@@ -36,6 +37,11 @@ namespace StorageWPF.Models
         {
             get => _um;
             set => Set(ref _um, value);
+        }
+        public DateTime Dt
+        {
+            get => Date;
+            set => Set(ref Date, value);
         }
         public double Sum => _price * _count;
     }

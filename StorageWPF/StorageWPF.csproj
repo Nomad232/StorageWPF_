@@ -16,6 +16,7 @@
     <None Remove="Images\InventoryListIcon.png" />
     <None Remove="Images\LoginIcon.png" />
     <None Remove="Images\Logo\logo_transparent.png" />
+    <None Remove="Images\LoupeIcon.png" />
     <None Remove="Images\PasswordIcon.png" />
     <None Remove="Images\UserWhiteIcon.png" />
   </ItemGroup>
@@ -27,6 +28,7 @@
     <Resource Include="Images\InventoryListIcon.png" />
     <Resource Include="Images\LoginIcon.png" />
     <Resource Include="Images\Logo\logo_transparent.png" />
+    <Resource Include="Images\LoupeIcon.png" />
     <Resource Include="Images\PasswordIcon.png" />
     <Resource Include="Images\UserWhiteIcon.png" />
   </ItemGroup>

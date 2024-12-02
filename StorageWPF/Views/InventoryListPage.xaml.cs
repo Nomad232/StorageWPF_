@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace StorageWPF.Views
 {
-    public partial class Login : Window
+    /// <summary>
+    /// Логика взаимодействия для InventoryListPage.xaml
+    /// </summary>
+    public partial class InventoryListPage : Page
     {
-        public Login()
+        public InventoryListPage()
         {
             InitializeComponent();
         }
