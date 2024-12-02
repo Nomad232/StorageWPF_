@@ -52,7 +52,7 @@
                         <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoginIcon.png"/>
-                    <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                    <TextBox Grid.Column="1" BorderThickness="1" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
                 </Grid>
             </Border>
         </ControlTemplate>
@@ -64,12 +64,11 @@
                         <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/PasswordIcon.png"/>
-                    <PasswordBox Grid.Column="1" BorderThickness="0" VerticalAlignment="Center" FontSize="16"/>
                 </Grid>
             </Border>
         </ControlTemplate>
     </Window.Resources>
-    
+
     <Border Style="{StaticResource Login}">
         <Grid>
             <Grid.RowDefinitions>
@@ -138,6 +137,13 @@
                 <PasswordBox Template="{StaticResource PasswordBoxLogin }"
                              Grid.Row="2" 
                              Margin="7"/>
+                <PasswordBox Grid.Row="2" 
+                             BorderThickness="1"
+                             Opacity="0.6"
+                             Background="Transparent" 
+                             VerticalAlignment="Center"
+                             FontSize="16"
+                             Margin="38,10,10,12"/>
                 <Button Style="{StaticResource LoginButton}"
                         Grid.Row="3"
                         Command="{Binding LoginCommand}"
