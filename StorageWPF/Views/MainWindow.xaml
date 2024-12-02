@@ -110,10 +110,14 @@
 
             <Border Grid.Row="2" CornerRadius="0,0,0,10">
                 <StackPanel Margin="0">
-                    <RadioButton Command="{Binding PageCommand}" Tag="../Images/GeneralInfoIcon.png" IsChecked="True" Height="70" GroupName="RadioMenu" Content="General info" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Command="{Binding PageCommand}" Tag="../Images/InventoryListIcon.png" Height="70" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Command="{Binding PageCommand}" Tag="../Images/DeliveryNoteIcon.png" Height="70" GroupName="RadioMenu" Content="Delivery note" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Command="{Binding PageCommand}" Tag="../Images/Expense invoice.png" Height="70" GroupName="RadioMenu" Content="Expense invoice" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/GeneralInfoIcon.png" IsChecked="True" Height="70" GroupName="RadioMenu" Content="General info" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/InventoryListIcon.png" Height="70" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/DeliveryNoteIcon.png" Height="70" GroupName="RadioMenu" Content="Delivery note" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/Expense invoice.png" Height="70" GroupName="RadioMenu" Content="Expense invoice" Style="{StaticResource RadioButtonMenu}"/>
                 </StackPanel>
             </Border>
 
@@ -132,7 +136,9 @@
                                    VerticalAlignment="Center"/>
                     </Border>
                     <Frame Grid.Row="1" 
+                           Content="{Binding CurrentPage}"
                            BorderThickness="0" 
+                           NavigationUIVisibility="Hidden"
                            Background="{StaticResource BackgroundWindowBrush}">
                     </Frame>
                 </Grid>

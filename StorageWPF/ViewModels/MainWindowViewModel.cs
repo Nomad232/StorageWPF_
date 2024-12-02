@@ -27,7 +27,7 @@ namespace StorageWPF.ViewModels
             Name = name;
             //Products з файлу
         }
-        
+
 
         //знач за замовч General
         private Page _currentPage;
