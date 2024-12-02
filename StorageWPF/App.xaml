@@ -8,11 +8,13 @@
         <Color x:Key="BlueGray">#FFD2DEDA</Color>
         <Color x:Key="DarkWater">#364f6b</Color>
         <Color x:Key="Green_">#008789</Color>
+        <Color x:Key="BlackBlue">#32344d</Color>
 
         <SolidColorBrush x:Key="DarkWaterBrush" Color="{StaticResource DarkWater}"/>
         <SolidColorBrush x:Key="BackgroundWindowBrush" Color="{StaticResource DefaultWhite}"/>
         <SolidColorBrush x:Key="ElementWindowBrush" Color="{StaticResource Green_}"/>
         <SolidColorBrush x:Key="ListBrush" Color="{StaticResource BlueGray}"/>
+        <SolidColorBrush x:Key="BackgroundMenuBrush" Color="{StaticResource BlackBlue}"/>
 
         <LinearGradientBrush x:Key="AnimatedBrush" StartPoint="0,0" EndPoint="1,0">
             <GradientStop Color="#FFA0CCF3" Offset="0" />
