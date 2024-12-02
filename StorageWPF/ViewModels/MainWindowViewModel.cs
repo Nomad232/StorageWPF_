@@ -11,11 +11,15 @@ using System.Collections.ObjectModel;
 
 namespace StorageWPF.ViewModels
 {
-    class MainWindowViewModel : ViewModel
+    internal class MainWindowViewModel : ViewModel
     {
         public bool IsGuest { get; }
         public string Name { get;}
         public ObservableCollection<Product> Products { get; set; }
+
+        public MainWindowViewModel()
+        {
+        }
 
         public MainWindowViewModel(bool isGuest, string name)
         {
