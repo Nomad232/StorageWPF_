@@ -41,9 +41,9 @@
                 </ListView.View>
             </ListView>
 
-            <Border Grid.Column="1" BorderThickness="2,0,0,0" BorderBrush="{StaticResource ElementWindowBrush}" Background="{StaticResource DarkWaterBrush}">
+            <Border Grid.Column="1" Background="{StaticResource BackgroundMenuBrush}">
                 <Grid>
-                    <StackPanel Margin="5">
+                    <StackPanel Margin="10">
                         <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
                             <Grid Margin="0">
                                 <Grid.ColumnDefinitions>
