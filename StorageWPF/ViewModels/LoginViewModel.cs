@@ -3,6 +3,7 @@ using StorageWPF.Views;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace StorageWPF.ViewModels
@@ -38,15 +39,18 @@ namespace StorageWPF.ViewModels
                 return loginCommand ??
                   (loginCommand = new RelayCommand(obj =>
                   {
-                      User user = new User(_username, _password);
-                      if (_users.Contains(user))
+                      if (obj is PasswordBox passwordBox)
                       {
-                          MainWindow mainWindow = new MainWindow();
-                          mainWindow.DataContext = new StorageViewModel(true);
-                          mainWindow.Show();
-                      }
-                      else
-                          MessageBox.Show("Такого користувача не існує");
+                          User user = new User(_username, passwordBox.Password);
+                          if (_users.Contains(user))
+                          {
+                              MainWindow mainWindow = new MainWindow();
+                              mainWindow.DataContext = new MainWindowViewModel(true, user.Username);
+                              mainWindow.Show();
+                          }
+                          else
+                              MessageBox.Show("No such user exists");
+                      }                      
                   }));
             }
         }
@@ -59,7 +63,7 @@ namespace StorageWPF.ViewModels
                     (guestCommand = new RelayCommand(obj =>
                     {
                         MainWindow mainWindow = new MainWindow();
-                        mainWindow.DataContext = new StorageViewModel(false);
+                        mainWindow.DataContext = new MainWindowViewModel(false, "Guest");
                         mainWindow.Show();
                     }));
             }
