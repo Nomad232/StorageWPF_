@@ -6,11 +6,25 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using StorageWPF.Views;
+using StorageWPF.Models;
+using System.Collections.ObjectModel;
 
 namespace StorageWPF.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
+        public bool IsGuest { get; }
+        public string Name { get;}
+        public ObservableCollection<Product> Products { get; set; }
+
+        public MainWindowViewModel(bool isGuest, string name)
+        {
+            this.IsGuest = isGuest;
+            Name = name;
+            //Products з файлу
+        }
+        
+
         //знач за замовч General
         private Page _currentPage;
         public Page CurrentPage

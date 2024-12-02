@@ -42,7 +42,7 @@ namespace StorageWPF.ViewModels
                       if (_users.Contains(user))
                       {
                           MainWindow mainWindow = new MainWindow();
-                          mainWindow.DataContext = new StorageViewModel(true);
+                          mainWindow.DataContext = new MainWindowViewModel(true, user.Username);
                           mainWindow.Show();
                       }
                       else
@@ -59,7 +59,7 @@ namespace StorageWPF.ViewModels
                     (guestCommand = new RelayCommand(obj =>
                     {
                         MainWindow mainWindow = new MainWindow();
-                        mainWindow.DataContext = new StorageViewModel(false);
+                        mainWindow.DataContext = new MainWindowViewModel(false, "Guest");
                         mainWindow.Show();
                     }));
             }
