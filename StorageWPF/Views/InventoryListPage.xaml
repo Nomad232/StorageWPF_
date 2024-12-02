@@ -11,18 +11,6 @@
       Title="InventoryListPage">
 
     <Page.Resources>
-        <ControlTemplate x:Key="SerchBox" TargetType="TextBox">
-            <Border Background="White"  CornerRadius="10" Opacity="0.9" BorderThickness="0,0,0,1.5" BorderBrush="{StaticResource DarkWaterBrush}">
-                <Grid Margin="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="10*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoupeIcon.png"/>
-                    <TextBox Grid.Column="1" Padding="0" BorderThickness="0" VerticalAlignment="Center" FontSize="16" Margin="5,0,0,0"/>
-                </Grid>
-            </Border>
-        </ControlTemplate>
 
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="{StaticResource ElementWindowBrush}" />
@@ -49,8 +37,15 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <Border>
-                        <TextBox Template="{StaticResource SerchBox}" Margin="10"/>
+                    <Border Margin="10" Background="{StaticResource BackgroundWindowBrush}"  CornerRadius="5" BorderThickness="0,0,0,1.5" BorderBrush="{StaticResource DarkWaterBrush}">
+                        <Grid Margin="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoupeIcon.png"/>
+                            <TextBox Grid.Column="1" Padding="0" BorderThickness="0.7" VerticalAlignment="Center" FontSize="16" Margin="5,0,5,0"/>
+                        </Grid>
                     </Border>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
