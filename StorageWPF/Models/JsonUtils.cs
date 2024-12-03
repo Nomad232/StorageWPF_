@@ -5,60 +5,82 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace StorageWPF.Models
 {
     public static class JsonUtils
     {
-        public static void ToJsonFile<T>(T data, string path)
+        public static void ToJsonFile<T>(T data, Type type)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            string path;
+            if (type == typeof(User))
             {
-                return;
+                path = "../../../Data/Users.json";
             }
-
+            else if (type == typeof(Product))
+            {
+                path = "../../../Data/Products.json";
+            }
+            else
+            {
+                throw new ArgumentException(type.ToString());
+            }
             try
             {
-                var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true }); // Сериализация с отступами
-                using (var writer = new StreamWriter(path))
+                // Створення директорії, якщо вона не існує
+                string directory = Path.GetDirectoryName(path);
+                if (!Directory.Exists(directory))
                 {
-                    writer.Write(json);
+                    Directory.CreateDirectory(directory);
                 }
 
-                Console.WriteLine($"Дані успішно збережені в файл: {path}");
+                // Серіалізація об'єкта в JSON
+                string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+
+                // Запис JSON у файл
+                File.WriteAllText(path, json);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Помилка при сериалізації: {ex.Message}");
+                Console.WriteLine($"Помилка запису у файл: {ex.Message}");
             }
         }
 
-        public static T FromJsonFile<T>(string path)
+        public static T? FromJsonFile<T>(Type type)
         {
-            if (string.IsNullOrWhiteSpace(path))
+            string path;
+            string currentDirectory = Directory.GetCurrentDirectory();
+            if (type == typeof(User))
             {
-                throw new ArgumentException("Вказаний шлях не може бути порожнім");
+                path = "../../../Data/Users.json";
             }
-
+            else if (type == typeof(Product))
+            {
+                path = "../../../Data/Products.json";
+            }
+            else
+            {
+                throw new ArgumentException(type.ToString());
+            }
             try
             {
-                using (var reader = new StreamReader(path))
+                if (!File.Exists(path))
                 {
-                    var json = reader.ReadToEnd();
-                    var deserializedObject = JsonSerializer.Deserialize<T>(json);
-                    Console.WriteLine($"Дані успішно завантажені з файлу: {path}");
-                    return deserializedObject;
+                    return default;
                 }
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine($"Файл не знайдено: {path}");
-                throw;
+
+                // Читання JSON із файлу
+                string json = File.ReadAllText(path);
+
+                // Десеріалізація JSON у об'єкт
+                return JsonSerializer.Deserialize<T>(json);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Помилка при десериалізації: {ex.Message}");
-                throw;
+                Console.WriteLine($"Помилка читання з файлу: {ex.Message}");
+                return default;
             }
         }
     }
