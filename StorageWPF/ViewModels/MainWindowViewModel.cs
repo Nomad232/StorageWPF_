@@ -13,8 +13,8 @@ namespace StorageWPF.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        public bool IsGuest { get; }
-        public string Name { get;}
+        private bool _isGuest;
+        public string Name { get; }
         public ObservableCollection<Product> Products { get; set; }
 
         private Dictionary<string, Page> _pageCache = new Dictionary<string, Page>();
@@ -25,11 +25,25 @@ namespace StorageWPF.ViewModels
 
         public MainWindowViewModel(bool isGuest, string name)
         {
-            this.IsGuest = isGuest;
+            _isGuest = isGuest;
             Name = name;
             //Products з файлу
         }
 
+        public Visibility IsGuest
+        {
+            get
+            {
+                if (_isGuest)
+                {
+                    return Visibility.Collapsed;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+            }
+        }
 
         //знач за замовч General
         private Page _currentPage = new GeneralInfoPage();

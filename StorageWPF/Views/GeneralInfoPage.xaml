@@ -17,11 +17,11 @@
     <Grid>
         <Border Grid.Column="0">
             <lvc:CartesianChart>
-                <lvc:CartesianChart.Series>
-                    <lvc:ColumnSeries Title="Количество" Values="{Binding Elements, Converter={StaticResource ValuesConverter}}" />
+                <lvc:CartesianChart.Series >
+                    <lvc:ColumnSeries Title="Количество" Values="{Binding Products, Converter={StaticResource ValuesConverter}}" />
                 </lvc:CartesianChart.Series>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Name" Labels="{Binding Elements, Converter={StaticResource LabelConverter}}" />
+                    <lvc:Axis Title="Name" Labels="{Binding Products, Converter={StaticResource LabelConverter}}" />
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Count" />

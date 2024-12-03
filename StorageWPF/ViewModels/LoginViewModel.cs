@@ -11,7 +11,6 @@ namespace StorageWPF.ViewModels
     internal class LoginViewModel : ViewModel
     {
         private string _username;
-        private string _password;
         private ObservableCollection<User> _users;
 
         public LoginViewModel()
@@ -25,11 +24,6 @@ namespace StorageWPF.ViewModels
             get => _username;
             set => Set(ref _username, value);
         }
-        public string Password
-        {
-            get => _password;
-            set => Set(ref _password, value);
-        }
 
         private RelayCommand loginCommand;
         public RelayCommand LoginCommand
@@ -41,16 +35,18 @@ namespace StorageWPF.ViewModels
                   {
                       if (obj is PasswordBox passwordBox)
                       {
-                          User user = new User(_username, passwordBox.Password);
-                          if (_users.Contains(user))
+                          if (_users.Any(x => x.Username == _username && x.Password == passwordBox.Password))
                           {
                               MainWindow mainWindow = new MainWindow();
-                              mainWindow.DataContext = new MainWindowViewModel(true, user.Username);
+                              mainWindow.DataContext = new MainWindowViewModel(true, _username);
+                              var currentWindow = Application.Current.Windows.OfType<Window>()
+                          .FirstOrDefault(w => w.IsActive);
+                              currentWindow?.Close();
                               mainWindow.Show();
                           }
                           else
-                              MessageBox.Show("No such user exists");
-                      }                      
+                              MessageBox.Show("Incorrect login or password");
+                      }
                   }));
             }
         }
@@ -63,11 +59,14 @@ namespace StorageWPF.ViewModels
                     (guestCommand = new RelayCommand(obj =>
                     {
                         MainWindow mainWindow = new MainWindow();
-                        mainWindow.DataContext = new MainWindowViewModel(false, "Guest");
+                        mainWindow.DataContext = new MainWindowViewModel(true, "Guest");
+                        var currentWindow = Application.Current.Windows.OfType<Window>()
+                        .FirstOrDefault(w => w.IsActive);
+                        currentWindow?.Close();
                         mainWindow.Show();
                     }));
             }
         }
-        
+
     }
 }

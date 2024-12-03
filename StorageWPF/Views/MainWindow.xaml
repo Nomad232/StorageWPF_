@@ -50,7 +50,7 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground" Value="{StaticResource BackgroundWindowBrush}"/>
-                <Setter Property="Background" Value="#32344d"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundMenuBrush}"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Style.Setters>
             <Style.Triggers>
@@ -85,8 +85,12 @@
                         <TextBlock Text="Main"/>
                     </Viewbox>
                     <UniformGrid Grid.Column="2" Columns="2" Margin="0,0,0,0">
-                        <Button Content="-" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
-                        <Button Content="X" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Command="{Binding MinimizeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Content="-" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Content="X" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
                     </UniformGrid>
                 </Grid>
             </Border>
@@ -115,9 +119,9 @@
                     <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
                                  Tag="../Images/InventoryListIcon.png" Height="70" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
                     <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                 Tag="../Images/DeliveryNoteIcon.png" Height="70" GroupName="RadioMenu" Content="Delivery note" Style="{StaticResource RadioButtonMenu}"/>
+                                 Tag="../Images/DeliveryNoteIcon.png" Visibility="{Binding IsGuest}" Height="70" GroupName="RadioMenu" Content="Delivery note" Style="{StaticResource RadioButtonMenu}"/>
                     <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                 Tag="../Images/Expense invoice.png" Height="70" GroupName="RadioMenu" Content="Expense invoice" Style="{StaticResource RadioButtonMenu}"/>
+                                 Tag="../Images/Expense invoice.png" Visibility="{Binding IsGuest}" Height="70" GroupName="RadioMenu" Content="Expense invoice" Style="{StaticResource RadioButtonMenu}"/>
                 </StackPanel>
             </Border>
 
