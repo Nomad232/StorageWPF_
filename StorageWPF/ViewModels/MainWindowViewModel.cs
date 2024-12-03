@@ -17,6 +17,8 @@ namespace StorageWPF.ViewModels
         public string Name { get;}
         public ObservableCollection<Product> Products { get; set; }
 
+        private Dictionary<string, Page> _pageCache = new Dictionary<string, Page>();
+
         public MainWindowViewModel()
         {
         }
@@ -30,7 +32,7 @@ namespace StorageWPF.ViewModels
 
 
         //знач за замовч General
-        private Page _currentPage;
+        private Page _currentPage = new GeneralInfoPage();
         public Page CurrentPage
         {
             get => _currentPage;
@@ -53,21 +55,26 @@ namespace StorageWPF.ViewModels
 
         private void PageSelect(string page)
         {
-            switch (page)
+            if (!_pageCache.ContainsKey(page))
             {
-                case "General info":
-                    //CurrentPage =
+                switch (page)
+                {
+                    case "General info":
+                        _pageCache[page] = new GeneralInfoPage();
                         break;
-                case "Inventory list":
-                    CurrentPage = new InventoryListPage();
-                    break;
-                case "Delivery note":
-                    CurrentPage = new DeliveryNotePage();
-                    break;
-                case "Expense invoice":
-                    CurrentPage = new ExpenseInvoicePage();
-                    break;
+                    case "Inventory list":
+                        _pageCache[page] = new InventoryListPage();
+                        break;
+                    case "Delivery note":
+                        _pageCache[page] = new DeliveryNotePage();
+                        break;
+                    case "Expense invoice":
+                        _pageCache[page] = new ExpenseInvoicePage();
+                        break;
+                }
             }
+
+            CurrentPage = _pageCache[page];
         }
     }
 }
