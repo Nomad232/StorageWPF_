@@ -17,11 +17,7 @@ namespace StorageWPF.ViewModels
         public LoginViewModel()
         {
             _users = JsonUtils.FromJsonFile<ObservableCollection<User>>(typeof(User));
-            if (_users == null)
-            {
-                MessageBox.Show("Відсутній файл Users.json");
-                Application.Current.Shutdown();
-            }
+            if (_users == null) _users = new ObservableCollection<User>();
         }
 
         public string Username
