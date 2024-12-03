@@ -57,10 +57,17 @@
                             <Grid Margin="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="8*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="6*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Count:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBox Grid.Column="1" Margin="3" BorderThickness="1" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <Slider Grid.Column="2" 
+                                        BorderThickness="1"
+                                        FontWeight="DemiBold" 
+                                        VerticalAlignment="Center"
+                                        Minimum="1"
+                                        FontSize="16"/>
                             </Grid>
                         </Border>
 
