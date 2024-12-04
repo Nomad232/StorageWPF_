@@ -44,7 +44,7 @@
                                 <ColumnDefinition Width="10*"/>
                             </Grid.ColumnDefinitions>
                             <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/Images/LoupeIcon.png"/>
-                            <TextBox Grid.Column="1" Padding="0" BorderThickness="0.7" VerticalAlignment="Center" FontSize="16" Margin="5,0,5,0"/>
+                            <TextBox Grid.Column="1" Text="{Binding Search}"  Padding="0" BorderThickness="0.7" VerticalAlignment="Center" FontSize="16" Margin="5,0,5,0"/>
                         </Grid>
                     </Border>
 
@@ -52,6 +52,7 @@
                         <TextBlock Text="Filter:" FontSize="25" Foreground="White"/>
                         <ComboBox Width="120" 
                                   ItemsSource="{Binding Filters}"
+                                  SelectedItem="{Binding SelectedFilter}"
                                   Margin="10" 
                                   VerticalAlignment="Center"
                                   BorderThickness="0" 
@@ -61,14 +62,14 @@
                 </Grid>
             </Border>
 
-            <ListView Grid.Row="1"  Name="MyListView" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
+            <ListView Grid.Row="1"  Name="MyListView" ItemsSource="{Binding Products}" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding}" Width="151" />
-                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding}" Width="151" />
-                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding}" Width="150" />
-                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding}" Width="150" />
-                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding}" Width="150" />
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="151" />
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="151" />
+                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Count}" Width="150" />
+                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding UM}" Width="150" />
+                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding Dt}" Width="150" />
                     </GridView>
                 </ListView.View>
             </ListView>

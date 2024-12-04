@@ -16,7 +16,12 @@ namespace StorageWPF.ViewModels
         public string _selectedFilter = "None";
 
 
-        public string[] Filter = { "None", "Name", "Price", "Count", "Unit", "Last date" };
+        public string[] Filters {  get; set; } = { "None", "Name", "Price", "Count", "Unit", "Last date" };
+
+        public InventoryViewModel()
+        {
+            _products = new ObservableCollection<Product>();
+        }
         public InventoryViewModel(ObservableCollection<Product> products)
         {
             _products = products;
@@ -28,7 +33,10 @@ namespace StorageWPF.ViewModels
             _products.Select(product => new Product
             {
                 Name = product.Name,
-                Price = product.Price
+                Price = product.Price,
+                Dt = product.Dt,
+                Count = product.Count,
+                UM = product.UM,   
             }));
         }
 
@@ -63,15 +71,15 @@ namespace StorageWPF.ViewModels
                         case "None":
                             return _products.ToList();
                         case "Name":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Name).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Name).ToList();
                         case "Price":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Price).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Price).ToList();
                         case "Count":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Count).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Count).ToList();
                         case "Unit":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.UM).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.UM).ToList();
                         case "Last date":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Dt).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Dt).ToList();
                         default:
                             return _products.ToList();
                     }
@@ -83,15 +91,15 @@ namespace StorageWPF.ViewModels
                         case "None":
                             return CreateNewCopyOfProducts().Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
                         case "Name":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Name).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Name).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
                         case "Price":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Price).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Price).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
                         case "Count":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Count).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Count).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
                         case "Unit":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.UM).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.UM).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
                         case "Last date":
-                            return CreateNewCopyOfProducts().OrderBy(x => x.Dt).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Dt).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
                         default:
                             return _products.ToList();
                     }

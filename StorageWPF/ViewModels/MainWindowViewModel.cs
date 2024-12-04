@@ -87,7 +87,7 @@ namespace StorageWPF.ViewModels
                     case "Inventory list":
                         _pageCache[page] = new InventoryListPage()
                         {
-                            DataContext = new GeneralViewModel(Products)
+                            DataContext = new InventoryViewModel(Products)
                         };
                         break;
                     case "Delivery note":
