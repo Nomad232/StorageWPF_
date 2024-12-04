@@ -38,7 +38,7 @@ namespace StorageWPF.ViewModels
                           if (_users.Any(x => x.Username == _username && x.Password == passwordBox.Password))
                           {
                               MainWindow mainWindow = new MainWindow();
-                              mainWindow.DataContext = new MainWindowViewModel(true, _username);
+                              mainWindow.DataContext = new MainWindowViewModel(false, _username);
                               var currentWindow = Application.Current.Windows.OfType<Window>()
                           .FirstOrDefault(w => w.IsActive);
                               currentWindow?.Close();
@@ -59,7 +59,7 @@ namespace StorageWPF.ViewModels
                     (guestCommand = new RelayCommand(obj =>
                     {
                         MainWindow mainWindow = new MainWindow();
-                        mainWindow.DataContext = new MainWindowViewModel(true, "Guest");
+                        mainWindow.DataContext = new MainWindowViewModel(false, "Guest");
                         var currentWindow = Application.Current.Windows.OfType<Window>()
                         .FirstOrDefault(w => w.IsActive);
                         currentWindow?.Close();

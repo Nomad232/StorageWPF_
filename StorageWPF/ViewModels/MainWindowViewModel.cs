@@ -91,7 +91,10 @@ namespace StorageWPF.ViewModels
                         };
                         break;
                     case "Delivery note":
-                        _pageCache[page] = new DeliveryNotePage();
+                        _pageCache[page] = new DeliveryNotePage()
+                        {
+                            DataContext = new DeliveryNoteViewModel(Products)
+                        };
                         break;
                     case "Expense invoice":
                         _pageCache[page] = new ExpenseInvoicePage();

@@ -13,7 +13,7 @@ namespace StorageWPF.ViewModels
     {
         private Product _newProduct = new Product();
         private Product _selectedProduct;
-        public ObservableCollection<Product> DeliveryProducts;
+        public ObservableCollection<Product> DeliveryProducts {  get; set; }
         private ObservableCollection<Product> _products;
 
         public Units_Of_Measurement[] AllUnits => (Units_Of_Measurement[])Enum.GetValues(typeof(Units_Of_Measurement));
@@ -96,10 +96,8 @@ namespace StorageWPF.ViewModels
                 errors.Add("Name cannot be empty.");
             if (CurrentPrice <= 0)
                 errors.Add("Price must be greater than 0.");
-            if (CurrentCount < 0)
-                errors.Add("Count cannot be negative.");
-            if (CurrentUnit == default(Units_Of_Measurement))
-                errors.Add("Please select a unit of measurement.");
+            if (CurrentCount <= 0)
+                errors.Add("Count must be greater than 0.");
             if (CurrentDate < new DateTime(2000, 1, 1) || CurrentDate > DateTime.Now)
                 errors.Add("Date must be between January 1, 2000, and now.");
 
@@ -122,13 +120,45 @@ namespace StorageWPF.ViewModels
                     {
                         if (CheckFields())
                         {
-                            DeliveryProducts.Add(_newProduct);
-                            _newProduct = new Product();
+                            if(DeliveryProducts.Any(x=> x.Name == _newProduct.Name && x.UM == _newProduct.UM))
+                            {
+                                var queue = DeliveryProducts.First(x => x.Name == _newProduct.Name && x.UM == _newProduct.UM);
+                                queue.Count += _newProduct.Count;
+                                queue.Price += _newProduct.Count;
+
+                                _newProduct = new Product();
+                                CurrentCount = 0;
+                                CurrentName = "";
+                                CurrentPrice = 0;
+                            }
+                            else
+                            {
+                                DeliveryProducts.Add(_newProduct);
+                                _newProduct = new Product();
+                                CurrentCount = 0;
+                                CurrentName = "";
+                                CurrentPrice = 0;
+                            }                       
                         }
                     }));
             }
         }
 
+        private RelayCommand _removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return _removeCommand ??
+                    (_removeCommand = new RelayCommand(obj =>
+                    {
+                        if (_selectedProduct != null)
+                        {
+                            DeliveryProducts.Remove(_selectedProduct);
+                        }
+                    }));
+            }
+        }
 
     }
 }
