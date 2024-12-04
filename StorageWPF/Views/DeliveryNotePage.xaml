@@ -90,9 +90,9 @@
                         
                         <Button Margin="6" Command="{Binding ConfirmCommand}"  Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
 
-                        <UniformGrid Margin="10" Background="{StaticResource ElementWindowBrush}" Columns="2">
+                        <UniformGrid Margin="20" Background="{StaticResource ElementWindowBrush}" Columns="2">
                             <Label Content="Final cost:" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
-                            <TextBlock Text="" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
+                            <TextBlock Text="{Binding FinalCost}" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
                         </UniformGrid>
                         
                     </StackPanel>

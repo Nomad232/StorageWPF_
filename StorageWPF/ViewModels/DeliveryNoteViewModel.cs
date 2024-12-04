@@ -88,7 +88,7 @@ namespace StorageWPF.ViewModels
             }
         }
 
-        public double FinalCost => DeliveryProducts.Sum(x => x.Sum);
+        public string FinalCost => DeliveryProducts.Sum(x => x.Sum).ToString("f2");
 
         private bool CheckFields()
         {
@@ -178,9 +178,20 @@ namespace StorageWPF.ViewModels
                         if (DeliveryProducts.Count > 0)
                         {
                             var mergedProducts = _products
-                                .Union(DeliveryProducts,)
-                                .ToList();
+                                                .Union(DeliveryProducts, new ProductComparer())
+                                                .ToList();
 
+                            _products.Clear();
+                            foreach (var product in mergedProducts)
+                            {
+                                _products.Add(product);
+                            }
+
+                            MessageBox.Show("Products have been successfully added");
+                            DeliveryProducts.Clear();
+
+                            JsonUtils.ToJsonFile(_products, typeof(Product));
+                            OnPropertyChanged(nameof(FinalCost));
                         }
                     }));
             }
