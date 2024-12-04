@@ -5,44 +5,116 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace StorageWPF.ViewModels
 {
-    class InventoryViewModel : ViewModel
+    internal class InventoryViewModel : ViewModel
     {
-        private string search;
-        private ObservableCollection<Product> List { get; set; }
+        private string _search;
+        private ObservableCollection<Product> _products;
+        public string _selectedFilter = "None";
 
-        public ObservableCollection<Product> Products { get; }
-        public InventoryViewModel(ObservableCollection<Product> Products) 
+        public string[] Filters { get; set; } = { "None", "Name", "Price", "Count", "Unit", "Last date" };
+
+        public InventoryViewModel()
         {
-            this.Products = Products;
-            List = Products;
+            _products = new ObservableCollection<Product>();
+            UpdateTable();
+        }
+        public InventoryViewModel(ObservableCollection<Product> products)
+        {
+            _products = products;
+            UpdateTable();
         }
 
+        private async Task UpdateTable()
+        {
+            while (true)
+            {
+                OnPropertyChanged(nameof(Products));
+                await Task.Delay(1000);
+            }
+        }
+
+        private ObservableCollection<Product> CreateNewCopyOfProducts()
+        {
+            return new ObservableCollection<Product>(
+            _products.Select(product => new Product
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Dt = product.Dt,
+                Count = product.Count,
+                UM = product.UM,
+            }));
+        }
 
         public string Search
         {
-            get => search;
+            get => _search;
             set
             {
-                Set(ref search, value);
-                UpdateList();
-                // filtr
+                Set(ref _search, value);
+                OnPropertyChanged(nameof(Products));
             }
         }
 
-        public void UpdateList()
+        public string SelectedFilter
         {
-            if (string.IsNullOrWhiteSpace(Search))
-                List = Products;
-            //+ фільтр
-            else
+            get => _selectedFilter;
+            set
             {
-                List = new ObservableCollection<Product>(Products.Where(el => el.Name.ToLower().Contains(search.ToLower())));
+                Set(ref _selectedFilter, value);
+                OnPropertyChanged(nameof(Products));
             }
-
         }
 
+        public List<Product> Products
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_search) || string.IsNullOrWhiteSpace(_search))
+                {
+                    switch (_selectedFilter)
+                    {
+                        case "None":
+                            return _products.ToList();
+                        case "Name":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Name).ToList();
+                        case "Price":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Price).ToList();
+                        case "Count":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Count).ToList();
+                        case "Unit":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.UM).ToList();
+                        case "Last date":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Dt).ToList();
+                        default:
+                            return _products.ToList();
+                    }
+                }
+                else
+                {
+                    switch (_selectedFilter)
+                    {
+                        case "None":
+                            return CreateNewCopyOfProducts().Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                        case "Name":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Name).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                        case "Price":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Price).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                        case "Count":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Count).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                        case "Unit":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.UM).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                        case "Last date":
+                            return CreateNewCopyOfProducts().OrderByDescending(x => x.Dt).Where(x => x.Name.Contains(_search, StringComparison.OrdinalIgnoreCase)).ToList();
+                        default:
+                            return _products.ToList();
+                    }
+                }
+            }
+        }
     }
 }

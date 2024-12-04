@@ -1,4 +1,4 @@
-﻿<Page x:Class="StorageWPF.Views.DeliveryNotePage"
+﻿<Page x:Class="StorageWPF.Views.ExpenseInvoicePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:StorageWPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="485" d:DesignWidth="765"
-      Title="DeliveryNotePage">
-
+      Title="ExpenseInvoicePage">
     <Page.Resources>
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="{StaticResource ElementWindowBrush}" />
@@ -29,13 +28,14 @@
             </Grid.ColumnDefinitions>
 
 
-            <ListView Name="MyListView" ItemsSource="{Binding DeliveryProducts}" SelectedItem="{Binding SelectedProduct}" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
+            <ListView Name="MyListView" ItemsSource="{Binding NewProducts}"  SelectedItem="{Binding SelectedProductForRemove}" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="120" />
-                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="120" />
-                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Count}" Width="120" />
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="91" />
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="91" />
+                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Count}" Width="91" />
                         <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding UM}" Width="91" />
+                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding Dt}" Width="91" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -50,51 +50,40 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Name:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" Text="{Binding CurrentName}" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding CopyProducts}" SelectedItem="{Binding SelectedProduct}"/>
                             </Grid>
                         </Border>
                         <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
                             <Grid Margin="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Price:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" Text="{Binding CurrentPrice}" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
-                            </Grid>
-                        </Border>
-                        <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
-                            <Grid Margin="0">
-                                <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="8*"/>
+                                    <ColumnDefinition Width="6*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Count:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" Text="{Binding CurrentCount}" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBox Grid.Column="1" Text="{Binding NewCount, UpdateSourceTrigger=PropertyChanged}" Margin="3" BorderThickness="1" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <Slider Grid.Column="2" 
+                                        Value="{Binding NewCount, UpdateSourceTrigger=PropertyChanged}"
+                                        Maximum="{Binding CurrentCount, UpdateSourceTrigger=PropertyChanged}"
+                                        BorderThickness="1"
+                                        FontWeight="DemiBold" 
+                                        VerticalAlignment="Center"
+                                        Minimum="0"
+                                        FontSize="16"/>
                             </Grid>
                         </Border>
-                        <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
-                            <Grid Margin="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Unit:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding AllUnits}" SelectedItem="{Binding CurrentUnit}"/>
-                            </Grid>
-                        </Border>
+
                         <UniformGrid Columns="2" Height="50">
                             <Button Margin="6" Command="{Binding AddCommand}" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                             <Button Margin="6" Command="{Binding RemoveCommand}" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                         </UniformGrid>
-                        
-                        <Button Margin="6" Command="{Binding ConfirmCommand}"  Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+
+                        <Button Margin="6" Command="{Binding ConfirmCommand}" Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
 
                         <UniformGrid Margin="20" Background="{StaticResource ElementWindowBrush}" Columns="2">
                             <Label Content="Final cost:" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
                             <TextBlock Text="{Binding FinalCost}" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
                         </UniformGrid>
-                        
                     </StackPanel>
                 </Grid>
             </Border>

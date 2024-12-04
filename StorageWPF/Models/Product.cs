@@ -44,5 +44,10 @@ namespace StorageWPF.Models
             set => Set(ref Date, value);
         }
         public double Sum => _price * _count;
+
+        public override string ToString()
+        {
+            return $"{Name}({UM})";
+        }
     }
 }

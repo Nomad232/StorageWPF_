@@ -52,23 +52,5 @@ namespace StorageWPF.ViewModels
                     }));
             }
         }
-        private RelayCommand dragCommand;
-        public RelayCommand DragCommand
-        {
-            get
-            {
-                return dragCommand ??
-                    (dragCommand = new RelayCommand(obj =>
-                    {
-                        if (obj is Window window)
-                        {
-                            if (Mouse.LeftButton == MouseButtonState.Pressed)
-                            {
-                                window.DragMove();
-                            }
-                        }
-                    }));
-            }
-        }
     }
 }

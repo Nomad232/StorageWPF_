@@ -11,19 +11,44 @@ using System.Collections.ObjectModel;
 
 namespace StorageWPF.ViewModels
 {
-    class MainWindowViewModel : ViewModel
+    internal class MainWindowViewModel : ViewModel
     {
-        public bool IsGuest { get; }
-        public string Name { get;}
+        private bool _isGuest;
+        public string Name { get; }
         public ObservableCollection<Product> Products { get; set; }
+
+        private Dictionary<string, Page> _pageCache = new Dictionary<string, Page>();
+
+        public MainWindowViewModel()
+        {
+            Products = JsonUtils.FromJsonFile<ObservableCollection<Product>>(typeof(Product));
+            if(Products == null) Products = new ObservableCollection<Product>();
+        }
 
         public MainWindowViewModel(bool isGuest, string name)
         {
-            this.IsGuest = isGuest;
+            _isGuest = isGuest;
             Name = name;
-            //Products з файлу
+
+            Products = JsonUtils.FromJsonFile<ObservableCollection<Product>>(typeof(Product));
+            if (Products == null) Products = new ObservableCollection<Product>();
+            PageSelect("General info");
         }
-        
+
+        public Visibility IsGuest
+        {
+            get
+            {
+                if (_isGuest)
+                {
+                    return Visibility.Collapsed;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+            }
+        }
 
         //знач за замовч General
         private Page _currentPage;
@@ -49,21 +74,38 @@ namespace StorageWPF.ViewModels
 
         private void PageSelect(string page)
         {
-            switch (page)
+            if (!_pageCache.ContainsKey(page))
             {
-                case "General":
-                    //CurrentPage =
+                switch (page)
+                {
+                    case "General info":
+                        _pageCache[page] = new GeneralInfoPage()
+                        {
+                            DataContext = new GeneralViewModel(Products)
+                        };
                         break;
-                case "Inventory":
-                    CurrentPage = new InventoryListPage();
-                    break;
-                case "Delivery":
-                    CurrentPage = new DeliveryNotePage();
-                    break;
-                case "Expense":
-                    //CurrentPage = new 
-                    break;
+                    case "Inventory list":
+                        _pageCache[page] = new InventoryListPage()
+                        {
+                            DataContext = new InventoryViewModel(Products)
+                        };
+                        break;
+                    case "Delivery note":
+                        _pageCache[page] = new DeliveryNotePage()
+                        {
+                            DataContext = new DeliveryNoteViewModel(Products)
+                        };
+                        break;
+                    case "Expense invoice":
+                        _pageCache[page] = new ExpenseInvoicePage()
+                        {
+                            DataContext = new ExpenseInvoiceViewModel(Products)
+                        };
+                        break;
+                }
             }
+
+            CurrentPage = _pageCache[page];
         }
     }
 }

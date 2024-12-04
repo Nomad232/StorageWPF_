@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageWPF.Views"
+        xmlns:vm="clr-namespace:StorageWPF.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource DefaultWindow}"
         Title="MainWindow" Height="600" Width="1000">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
 
     <Window.Resources>
         <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
@@ -45,7 +50,7 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="Foreground" Value="{StaticResource BackgroundWindowBrush}"/>
-                <Setter Property="Background" Value="#32344d"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundMenuBrush}"/>
                 <Setter Property="BorderThickness" Value="0"/>
             </Style.Setters>
             <Style.Triggers>
@@ -55,7 +60,6 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-
 
     <Border Style="{StaticResource Main}" Background="#32344d">
         <Grid>
@@ -69,7 +73,7 @@
                 <RowDefinition Height="16*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Top}">
+            <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Top}" MouseDown="Border_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -80,8 +84,12 @@
                         <TextBlock Text="Main"/>
                     </Viewbox>
                     <UniformGrid Grid.Column="2" Columns="2" Margin="0,0,0,0">
-                        <Button Content="-" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
-                        <Button Content="X" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Command="{Binding MinimizeCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Content="-" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
+                        <Button Command="{Binding CloseCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                Content="X" Foreground="{StaticResource BackgroundWindowBrush}" Padding="0" FontSize="15" Background="Transparent" BorderThickness="0"/>
                     </UniformGrid>
                 </Grid>
             </Border>
@@ -96,7 +104,7 @@
                            RenderOptions.BitmapScalingMode="HighQuality" 
                            Source="../Images/UserWhiteIcon.png"/>
                     <TextBlock Grid.Column="1" 
-                               Text="User" 
+                               Text="{Binding Name}" 
                                Foreground="White" 
                                FontSize="20" 
                                VerticalAlignment="Center"/>
@@ -105,10 +113,14 @@
 
             <Border Grid.Row="2" CornerRadius="0,0,0,10">
                 <StackPanel Margin="0">
-                    <RadioButton Tag="../Images/GeneralInfoIcon.png" IsChecked="True" Height="70" GroupName="RadioMenu" Content="General info" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Tag="../Images/InventoryListIcon.png" Height="70" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Tag="../Images/DeliveryNoteIcon.png" Height="70" GroupName="RadioMenu" Content="Delivery note" Style="{StaticResource RadioButtonMenu}"/>
-                    <RadioButton Tag="../Images/Expense invoice.png" Height="70" GroupName="RadioMenu" Content="Expense invoice" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/GeneralInfoIcon.png" IsChecked="True" Height="70" GroupName="RadioMenu" Content="General info" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/InventoryListIcon.png" Height="70" GroupName="RadioMenu" Content="Inventory list" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/DeliveryNoteIcon.png" Visibility="{Binding IsGuest}" Height="70" GroupName="RadioMenu" Content="Delivery note" Style="{StaticResource RadioButtonMenu}"/>
+                    <RadioButton Command="{Binding PageCommand}" CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                 Tag="../Images/Expense invoice.png" Visibility="{Binding IsGuest}" Height="70" GroupName="RadioMenu" Content="Expense invoice" Style="{StaticResource RadioButtonMenu}"/>
                 </StackPanel>
             </Border>
 
@@ -118,16 +130,11 @@
                         <RowDefinition Height="3*"/>
                         <RowDefinition Height="16*"/>
                     </Grid.RowDefinitions>
-                    <Border Background="{StaticResource ElementWindowBrush}">
-                        <TextBlock Text="Text" 
-                                   Foreground="{StaticResource BackgroundWindowBrush}"
-                                   FontSize="30" 
-                                   FontWeight="DemiBold"
-                                   HorizontalAlignment="Center" 
-                                   VerticalAlignment="Center"/>
-                    </Border>
-                    <Frame Grid.Row="1" 
+                    <Frame Grid.Row="0" 
+                           Grid.RowSpan="2"            
+                           Content="{Binding CurrentPage}"
                            BorderThickness="0" 
+                           NavigationUIVisibility="Hidden"
                            Background="{StaticResource BackgroundWindowBrush}">
                     </Frame>
                 </Grid>
