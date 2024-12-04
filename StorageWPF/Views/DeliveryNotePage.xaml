@@ -87,7 +87,14 @@
                             <Button Margin="6" Command="{Binding AddCommand}" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                             <Button Margin="6" Command="{Binding RemoveCommand}" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                         </UniformGrid>
-                        <Button Margin="6" Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+                        
+                        <Button Margin="6" Command="{Binding ConfirmCommand}"  Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+
+                        <UniformGrid Margin="10" Background="{StaticResource ElementWindowBrush}" Columns="2">
+                            <Label Content="Final cost:" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
+                            <TextBlock Text="" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
+                        </UniformGrid>
+                        
                     </StackPanel>
                 </Grid>
             </Border>

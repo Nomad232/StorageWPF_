@@ -88,6 +88,8 @@ namespace StorageWPF.ViewModels
             }
         }
 
+        public double FinalCost => DeliveryProducts.Sum(x => x.Sum);
+
         private bool CheckFields()
         {
             var errors = new List<string>();
@@ -130,6 +132,8 @@ namespace StorageWPF.ViewModels
                                 CurrentCount = 0;
                                 CurrentName = "";
                                 CurrentPrice = 0;
+
+                                OnPropertyChanged(nameof(FinalCost));
                             }
                             else
                             {
@@ -138,6 +142,8 @@ namespace StorageWPF.ViewModels
                                 CurrentCount = 0;
                                 CurrentName = "";
                                 CurrentPrice = 0;
+
+                                OnPropertyChanged(nameof(FinalCost));
                             }                       
                         }
                     }));
@@ -155,6 +161,26 @@ namespace StorageWPF.ViewModels
                         if (_selectedProduct != null)
                         {
                             DeliveryProducts.Remove(_selectedProduct);
+                            OnPropertyChanged(nameof(FinalCost));
+                        }
+                    }));
+            }
+        }
+
+        private RelayCommand _confirmCommand;
+        public RelayCommand ConfirmCommand
+        {
+            get
+            {
+                return _confirmCommand ??
+                    (_confirmCommand = new RelayCommand(obj =>
+                    {
+                        if (DeliveryProducts.Count > 0)
+                        {
+                            var mergedProducts = _products
+                                .Union(DeliveryProducts,)
+                                .ToList();
+
                         }
                     }));
             }
