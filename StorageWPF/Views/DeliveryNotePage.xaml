@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <ListView Name="MyListView" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
+            <ListView Name="MyListView" ItemsSource="{Binding DeliveryProducts}" SelectedItem="{Binding SelectedProduct}" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="91" />
@@ -51,7 +51,7 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Name:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBox Grid.Column="1" Text="{Binding CurrentName}" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
                             </Grid>
                         </Border>
                         <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
@@ -61,7 +61,7 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Price:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBox Grid.Column="1" Text="{Binding CurrentPrice}" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
                             </Grid>
                         </Border>
                         <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
@@ -71,7 +71,7 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Count:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBox Grid.Column="1" Text="{Binding CurrentCount}" BorderThickness="0" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
                             </Grid>
                         </Border>
                         <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
@@ -81,11 +81,11 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Unit:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <ComboBox Grid.Column="1"/>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding AllUnits}" SelectedItem="{Binding CurrentUnit}"/>
                             </Grid>
                         </Border>
                         <UniformGrid Columns="2" Height="50">
-                            <Button Margin="6" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+                            <Button Margin="6" Command="{Binding AddCommand}" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                             <Button Margin="6" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                         </UniformGrid>
                         <Button Margin="6" Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>

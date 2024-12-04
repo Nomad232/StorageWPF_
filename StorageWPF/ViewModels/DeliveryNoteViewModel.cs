@@ -5,12 +5,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StorageWPF.ViewModels
 {
     internal class DeliveryNoteViewModel : ViewModel
     {
-        private Product _selectedProduct = new Product();
+        private Product _newProduct = new Product();
+        private Product _selectedProduct;
         public ObservableCollection<Product> DeliveryProducts;
         private ObservableCollection<Product> _products;
 
@@ -33,51 +35,100 @@ namespace StorageWPF.ViewModels
             set => Set(ref _selectedProduct, value);
         }
 
+        public Product NewProduct
+        {
+            get => _newProduct;
+            set => Set(ref _newProduct, value);
+        }
+
         public string CurrentName
         {
-            get => _selectedProduct.Name;
+            get => _newProduct.Name;
             set
             {
-                _selectedProduct.Name = value;
+                _newProduct.Name = value;
                 OnPropertyChanged(nameof(CurrentName));
             }
         }
         public double CurrentPrice
         {
-            get => _selectedProduct.Price;
+            get => _newProduct.Price;
             set
             {
-                _selectedProduct.Price = value;
+                _newProduct.Price = value;
                 OnPropertyChanged(nameof(CurrentPrice));
             }
         }
         public int CurrentCount
         {
-            get => _selectedProduct.Count;
+            get => _newProduct.Count;
             set
             {
-                _selectedProduct.Count = value;
+                _newProduct.Count = value;
                 OnPropertyChanged(nameof(CurrentCount));
             }
         }
 
         public Units_Of_Measurement CurrentUnit
         {
-            get => _selectedProduct.UM;
+            get => _newProduct.UM;
             set
             {
-                _selectedProduct.UM = value;
+                _newProduct.UM = value;
                 OnPropertyChanged(nameof(CurrentUnit));
             }
         }
         public DateTime CurrentDate
         {
-            get => _selectedProduct.Dt;
+            get => _newProduct.Dt;
             set
             {
-                _selectedProduct.Dt = value;
+                _newProduct.Dt = value;
                 OnPropertyChanged(nameof(CurrentDate));
             }
         }
+
+        private bool CheckFields()
+        {
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(CurrentName))
+                errors.Add("Name cannot be empty.");
+            if (CurrentPrice <= 0)
+                errors.Add("Price must be greater than 0.");
+            if (CurrentCount < 0)
+                errors.Add("Count cannot be negative.");
+            if (CurrentUnit == default(Units_Of_Measurement))
+                errors.Add("Please select a unit of measurement.");
+            if (CurrentDate < new DateTime(2000, 1, 1) || CurrentDate > DateTime.Now)
+                errors.Add("Date must be between January 1, 2000, and now.");
+
+            if (errors.Any())
+            {
+                MessageBox.Show(string.Join("\n", errors));
+                return false;
+            }
+
+            return true;
+        }
+
+        private RelayCommand _addCommand;
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return _addCommand ??
+                    (_addCommand = new RelayCommand(obj =>
+                    {
+                        if (CheckFields())
+                        {
+                            DeliveryProducts.Add(_newProduct);
+                            _newProduct = new Product();
+                        }
+                    }));
+            }
+        }
+
+
     }
 }
