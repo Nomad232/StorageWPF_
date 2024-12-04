@@ -14,8 +14,12 @@ namespace StorageWPF.ViewModels
 {
     internal class GeneralViewModel : ViewModel
     {
+        public string[] CombinedLabels => Labels.Zip(Units, (label, unit) => $"{label} ({unit})").ToArray();
+
+
         public string[] Labels => Products?.OrderBy(x=> x.Count).Select(e => e.Name).ToArray();
         public double[] Values => Products?.OrderBy(x => x.Count).Select(e => (double)e.Count).ToArray();
+        public Units_Of_Measurement[] Units => Products?.OrderBy(x => x.Count).Select(e => e.UM).ToArray();
         public ObservableCollection<Product> Products { get; set; }
         public GeneralViewModel(ObservableCollection<Product> products)
         {
@@ -51,9 +55,9 @@ namespace StorageWPF.ViewModels
 
         private void UpdatePlot()
         {
-            // Очистка предыдущего графика
             PlotModel.Series.Clear();
             PlotModel.Axes.Clear();
+
 
             // Создание серии данных
             var barSeries = new BarSeries
@@ -61,7 +65,8 @@ namespace StorageWPF.ViewModels
                 FontSize = 15,
                 ItemsSource = Values.Select(value => new BarItem { Value = value }).ToList(),
                 LabelPlacement = LabelPlacement.Inside,
-                LabelFormatString = "{0}"
+                LabelFormatString = "{0}",
+                TrackerFormatString = "{0}",
             };
 
             // Добавление серии на график
@@ -71,7 +76,7 @@ namespace StorageWPF.ViewModels
             PlotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Left,
-                ItemsSource = Labels
+                ItemsSource = CombinedLabels
             });
 
             // Настройка оси X (числовая ось для значений)

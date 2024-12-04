@@ -68,8 +68,8 @@
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="151" />
                         <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="151" />
                         <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Count}" Width="150" />
-                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding UM}" Width="150" />
-                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding Dt}" Width="150" />
+                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding UM}" Width="130" />
+                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding Dt}" Width="175" />
                     </GridView>
                 </ListView.View>
             </ListView>
