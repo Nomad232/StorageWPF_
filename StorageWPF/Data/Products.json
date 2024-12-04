@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Product_1",
+        "price": 83.13,
+        "count": 40,
+        "um": "meters",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_2",
+        "price": 5.04,
+        "count": 5,
+        "um": "meters",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_3",
+        "price": 13.92,
+        "count": 5,
+        "um": "pcs",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_4",
+        "price": 47.39,
+        "count": 31,
+        "um": "kg",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_5",
+        "price": 36.48,
+        "count": 48,
+        "um": "pcs",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_6",
+        "price": 93.97,
+        "count": 7,
+        "um": "kg",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_7",
+        "price": 42.54,
+        "count": 36,
+        "um": "pcs",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_8",
+        "price": 48.93,
+        "count": 24,
+        "um": "liters",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_9",
+        "price": 82.22,
+        "count": 43,
+        "um": "pcs",
+        "date": "2024-12-04 00:04:21"
+    },
+    {
+        "name": "Product_10",
+        "price": 85.04,
+        "count": 9,
+        "um": "pcs",
+        "date": "2024-12-04 00:04:21"
+    }
+]

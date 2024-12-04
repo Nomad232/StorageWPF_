@@ -2,9 +2,10 @@
 {
     public enum Units_Of_Measurement
     {
-        Meters,
-        Kilograms,
+        Kg,
         Liters,
-        Units
+        Pcs,
+        Boxes,
+        Meters
     }
 }

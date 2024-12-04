@@ -21,13 +21,17 @@ namespace StorageWPF.ViewModels
 
         public MainWindowViewModel()
         {
+            Products = JsonUtils.FromJsonFile<ObservableCollection<Product>>(typeof(Product));
+            if(Products == null) Products = new ObservableCollection<Product>();
         }
 
         public MainWindowViewModel(bool isGuest, string name)
         {
             _isGuest = isGuest;
             Name = name;
-            //Products з файлу
+
+            Products = JsonUtils.FromJsonFile<ObservableCollection<Product>>(typeof(Product));
+            if (Products == null) Products = new ObservableCollection<Product>();
         }
 
         public Visibility IsGuest
@@ -74,10 +78,16 @@ namespace StorageWPF.ViewModels
                 switch (page)
                 {
                     case "General info":
-                        _pageCache[page] = new GeneralInfoPage();
+                        _pageCache[page] = new GeneralInfoPage()
+                        {
+                            DataContext = new GeneralViewModel(Products)
+                        };
                         break;
                     case "Inventory list":
-                        _pageCache[page] = new InventoryListPage();
+                        _pageCache[page] = new InventoryListPage()
+                        {
+                            DataContext = new GeneralViewModel(Products)
+                        };
                         break;
                     case "Delivery note":
                         _pageCache[page] = new DeliveryNotePage();
