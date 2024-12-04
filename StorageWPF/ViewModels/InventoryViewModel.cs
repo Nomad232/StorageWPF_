@@ -15,7 +15,6 @@ namespace StorageWPF.ViewModels
         private ObservableCollection<Product> _products;
         public string _selectedFilter = "None";
 
-
         public string[] Filters {  get; set; } = { "None", "Name", "Price", "Count", "Unit", "Last date" };
 
         public InventoryViewModel()
