@@ -32,6 +32,7 @@ namespace StorageWPF.ViewModels
 
             Products = JsonUtils.FromJsonFile<ObservableCollection<Product>>(typeof(Product));
             if (Products == null) Products = new ObservableCollection<Product>();
+            PageSelect("General info");
         }
 
         public Visibility IsGuest
@@ -50,7 +51,7 @@ namespace StorageWPF.ViewModels
         }
 
         //знач за замовч General
-        private Page _currentPage = new GeneralInfoPage();
+        private Page _currentPage;
         public Page CurrentPage
         {
             get => _currentPage;

@@ -4,29 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StorageWPF.Views"
-      xmlns:conv="clr-namespace:StorageWPF.Converters"
-      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="485" d:DesignWidth="765"
       Title="GeneralInfoPage">
-    <Page.Resources>
-        <conv:ChartLabelsConverter x:Key="LabelConverter"/>
-        <conv:ChartValuesConverter x:Key="ValuesConverter"/>
-    </Page.Resources>
 
     <Grid>
-        <Border Grid.Column="0">
-            <lvc:CartesianChart>
-                <lvc:CartesianChart.Series >
-                    <lvc:ColumnSeries Title="Количество" Values="{Binding Products, Converter={StaticResource ValuesConverter}}" />
-                </lvc:CartesianChart.Series>
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Name" Labels="{Binding Products, Converter={StaticResource LabelConverter}}" />
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Count" />
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </Border>
     </Grid>
 </Page>

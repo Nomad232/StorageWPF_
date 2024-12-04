@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\DeliveryNoteIcon.png" />
     <Resource Include="Images\Expense invoice.png" />
     <Resource Include="Images\GeneralInfoIcon.png" />
@@ -35,6 +31,10 @@
     <Resource Include="Images\LoupeIcon.png" />
     <Resource Include="Images\PasswordIcon.png" />
     <Resource Include="Images\UserWhiteIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
 
 </Project>

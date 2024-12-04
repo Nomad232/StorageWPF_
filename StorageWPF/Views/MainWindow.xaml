@@ -61,7 +61,6 @@
         </Style>
     </Window.Resources>
 
-
     <Border Style="{StaticResource Main}" Background="#32344d">
         <Grid>
             <Grid.ColumnDefinitions>
