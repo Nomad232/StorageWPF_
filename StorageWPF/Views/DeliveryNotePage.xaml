@@ -32,11 +32,11 @@
             <ListView Name="MyListView" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding}" Width="91" />
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="91" />
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="91" />
+                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Count}" Width="91" />
+                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding UM}" Width="91" />
+                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding Dt}" Width="91" />
                     </GridView>
                 </ListView.View>
             </ListView>
