@@ -10,6 +10,6 @@
       Title="GeneralInfoPage">
 
     <Grid>
-        <oxy:PlotView Model="{Binding PlotModel}" Grid.Row="1" />
+        <oxy:PlotView Background="{StaticResource BackgroundWindowBrush}" Model="{Binding PlotModel}" Grid.Row="1" />
     </Grid>
 </Page>

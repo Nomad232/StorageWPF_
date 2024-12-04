@@ -58,6 +58,7 @@ namespace StorageWPF.ViewModels
             // Создание серии данных
             var barSeries = new BarSeries
             {
+                FontSize = 15,
                 ItemsSource = Values.Select(value => new BarItem { Value = value }).ToList(),
                 LabelPlacement = LabelPlacement.Inside,
                 LabelFormatString = "{0}"
