@@ -50,9 +50,13 @@
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                         <TextBlock Text="Filter:" FontSize="25" Foreground="White"/>
-                        <ComboBox Width="120" Margin="10" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Center" TextBlock.FontSize="20">
-                            <ComboBoxItem Content="Unit"/>
-                        </ComboBox>
+                        <ComboBox Width="120" 
+                                  ItemsSource="{Binding Filters}"
+                                  Margin="10" 
+                                  VerticalAlignment="Center"
+                                  BorderThickness="0" 
+                                  HorizontalAlignment="Center" 
+                                  TextBlock.FontSize="20"/>
                     </StackPanel>
                 </Grid>
             </Border>
