@@ -37,4 +37,8 @@
     <Folder Include="Converters\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+  </ItemGroup>
+
 </Project>
