@@ -59,7 +59,7 @@ namespace StorageWPF.ViewModels
                     (guestCommand = new RelayCommand(obj =>
                     {
                         MainWindow mainWindow = new MainWindow();
-                        mainWindow.DataContext = new MainWindowViewModel(false, "Guest");
+                        mainWindow.DataContext = new MainWindowViewModel(true, "Guest");
                         var currentWindow = Application.Current.Windows.OfType<Window>()
                         .FirstOrDefault(w => w.IsActive);
                         currentWindow?.Close();

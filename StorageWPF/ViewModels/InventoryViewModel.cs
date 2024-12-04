@@ -15,15 +15,26 @@ namespace StorageWPF.ViewModels
         private ObservableCollection<Product> _products;
         public string _selectedFilter = "None";
 
-        public string[] Filters {  get; set; } = { "None", "Name", "Price", "Count", "Unit", "Last date" };
+        public string[] Filters { get; set; } = { "None", "Name", "Price", "Count", "Unit", "Last date" };
 
         public InventoryViewModel()
         {
             _products = new ObservableCollection<Product>();
+            UpdateTable();
         }
         public InventoryViewModel(ObservableCollection<Product> products)
         {
             _products = products;
+            UpdateTable();
+        }
+
+        private async Task UpdateTable()
+        {
+            while (true)
+            {
+                OnPropertyChanged(nameof(Products));
+                await Task.Delay(1000);
+            }
         }
 
         private ObservableCollection<Product> CreateNewCopyOfProducts()
@@ -35,7 +46,7 @@ namespace StorageWPF.ViewModels
                 Price = product.Price,
                 Dt = product.Dt,
                 Count = product.Count,
-                UM = product.UM,   
+                UM = product.UM,
             }));
         }
 
@@ -104,6 +115,6 @@ namespace StorageWPF.ViewModels
                     }
                 }
             }
-        }     
+        }
     }
 }

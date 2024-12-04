@@ -15,21 +15,19 @@ namespace StorageWPF.ViewModels
         private Product _selectedProduct;
         private int _newCount = 0;
         private ObservableCollection<Product> _products;
-        public ObservableCollection<Product> CopyProducts { get; set; }
+        public ObservableCollection<Product> CopyProducts => CreateNewCopyOfProducts();
         public ObservableCollection<Product> NewProducts { get; set; }
 
         public ExpenseInvoiceViewModel(ObservableCollection<Product> products)
         {
             _products = products;
             NewProducts = new ObservableCollection<Product>();
-            CopyProducts = CreateNewCopyOfProducts();
         }
 
         public ExpenseInvoiceViewModel()
         {
             _products = new ObservableCollection<Product>();
             NewProducts = new ObservableCollection<Product>();
-            CopyProducts = CreateNewCopyOfProducts();
         }
 
         private ObservableCollection<Product> CreateNewCopyOfProducts()
@@ -43,6 +41,17 @@ namespace StorageWPF.ViewModels
                 Count = product.Count,
                 UM = product.UM,
             }));
+        }
+
+        public Product SelectedProductForRemove
+        {
+            get => _selectedProductForRemove;
+            set
+            {
+
+                Set(ref _selectedProductForRemove, value);
+                OnPropertyChanged(nameof(NewCount));
+            }
         }
 
         public Product SelectedProduct
@@ -91,7 +100,11 @@ namespace StorageWPF.ViewModels
 
         public int CurrentCount
         {
-            get => _selectedProduct.Count;
+            get
+            {
+                if (_selectedProduct == null) return 0;
+                return _selectedProduct.Count;
+            }
             set
             {
                 _selectedProduct.Count = value;
@@ -102,10 +115,11 @@ namespace StorageWPF.ViewModels
         private bool CheckFields()
         {
             var errors = new List<string>();
-
-            if (string.IsNullOrWhiteSpace(CurrentName))
+            if (_selectedProduct == null)
                 errors.Add("Name cannot be empty.");
-            if (CurrentCount <= 0)
+            else if(CurrentCount == 0)
+                errors.Add($"The {SelectedProduct.Name} are out of stock.");
+            else if (_newCount <= 0)
                 errors.Add("Count must be greater than 0.");
 
             if (errors.Any())
@@ -132,25 +146,25 @@ namespace StorageWPF.ViewModels
                             if (NewProducts.Any(x => x.Name == _selectedProduct.Name && x.UM == _selectedProduct.UM))
                             {
                                 var queue = NewProducts.First(x => x.Name == _selectedProduct.Name && x.UM == _selectedProduct.UM);
-                                queue.Count += _selectedProduct.Count;
-                                _selectedProduct.Count -= _newCount;
-
-                                _newCount = 0;
-
-                                //CurrentCount = 0;
-                                //CurrentName = "";
-                                //SelectedProduct.Price = 0;
-                                //_selectedProduct = new Product();
+                                queue.Count += _newCount;
+                                CurrentCount -= _newCount;
+                                NewCount = 0;
 
                                 OnPropertyChanged(nameof(FinalCost));
                             }
                             else
                             {
-                                DeliveryProducts.Add(_newProduct);
-                                _newProduct = new Product();
-                                CurrentCount = 0;
-                                CurrentName = "";
-                                CurrentPrice = 0;
+
+                                NewProducts.Add(new Product()
+                                {
+                                    Count = _newCount,
+                                    Dt = _selectedProduct.Dt,
+                                    Name = _selectedProduct.Name,
+                                    Price = _selectedProduct.Price,
+                                    UM = _selectedProduct.UM,
+                                });
+                                CurrentCount -= _newCount;
+                                NewCount = 0;
 
                                 OnPropertyChanged(nameof(FinalCost));
                             }
@@ -167,9 +181,13 @@ namespace StorageWPF.ViewModels
                 return _removeCommand ??
                     (_removeCommand = new RelayCommand(obj =>
                     {
-                        if (_selectedProduct != null)
+                        if (_selectedProductForRemove != null)
                         {
-                            DeliveryProducts.Remove(_selectedProduct);
+                            var queue = CopyProducts.First(x => x.Name == _selectedProduct.Name && x.UM == _selectedProduct.UM);
+                            queue.Count += _selectedProductForRemove.Count;
+                            NewProducts.Remove(_selectedProductForRemove);
+
+                            OnPropertyChanged(nameof(CurrentCount));
                             OnPropertyChanged(nameof(FinalCost));
                         }
                     }));
@@ -177,6 +195,7 @@ namespace StorageWPF.ViewModels
         }
 
         private RelayCommand _confirmCommand;
+
         public RelayCommand ConfirmCommand
         {
             get
@@ -184,11 +203,16 @@ namespace StorageWPF.ViewModels
                 return _confirmCommand ??
                     (_confirmCommand = new RelayCommand(obj =>
                     {
-                        if (DeliveryProducts.Count > 0)
-                        {
-                            var mergedProducts = _products
-                                                .Union(DeliveryProducts, new ProductComparer())
-                                                .ToList();
+                        if (NewProducts.Count > 0)
+                        {                          
+                            var filteredProducts = _products
+                                .Where(p => !NewProducts.Any(np => np.Count == p.Count))
+                                .ToList();
+
+                            
+                            var mergedProducts = filteredProducts
+                                .Union(NewProducts, new ProductComparerInvoice())
+                                .ToList();
 
                             _products.Clear();
                             foreach (var product in mergedProducts)
@@ -196,10 +220,14 @@ namespace StorageWPF.ViewModels
                                 _products.Add(product);
                             }
 
-                            MessageBox.Show("Products have been successfully added");
-                            DeliveryProducts.Clear();
+
+                            MessageBox.Show("The products have been sent successfully");
+                            NewProducts.Clear();
+                            
+                            
 
                             JsonUtils.ToJsonFile(_products, typeof(Product));
+                            OnPropertyChanged(nameof(CopyProducts));
                             OnPropertyChanged(nameof(FinalCost));
                         }
                     }));

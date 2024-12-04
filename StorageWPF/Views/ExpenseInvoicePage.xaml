@@ -28,14 +28,14 @@
             </Grid.ColumnDefinitions>
 
 
-            <ListView Name="MyListView" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
+            <ListView Name="MyListView" ItemsSource="{Binding NewProducts}"  SelectedItem="{Binding SelectedProductForRemove}" Background="{StaticResource BackgroundWindowBrush}" BorderThickness="0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding}" Width="91" />
-                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding}" Width="91" />
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="91" />
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="91" />
+                        <GridViewColumn Header="Count" DisplayMemberBinding="{Binding Count}" Width="91" />
+                        <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding UM}" Width="91" />
+                        <GridViewColumn Header="Last date" DisplayMemberBinding="{Binding Dt}" Width="91" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -74,11 +74,11 @@
                         </Border>
 
                         <UniformGrid Columns="2" Height="50">
-                            <Button Margin="6" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
-                            <Button Margin="6" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+                            <Button Margin="6" Command="{Binding AddCommand}" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+                            <Button Margin="6" Command="{Binding RemoveCommand}" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                         </UniformGrid>
-                        
-                        <Button Margin="6" Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+
+                        <Button Margin="6" Command="{Binding ConfirmCommand}" Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
 
                         <UniformGrid Margin="20" Background="{StaticResource ElementWindowBrush}" Columns="2">
                             <Label Content="Final cost:" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>

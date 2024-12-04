@@ -73,7 +73,7 @@
                 <RowDefinition Height="16*"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Top}">
+            <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Top}" MouseDown="Border_MouseDown">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
