@@ -50,7 +50,7 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Name:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <ComboBox Grid.Column="1"/>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding CopyProducts}" SelectedItem="{Binding SelectedProduct}"/>
                             </Grid>
                         </Border>
                         <Border Background="White" Opacity="1" BorderThickness="0,0,0,4" BorderBrush="{StaticResource DarkWaterBrush}">
@@ -61,12 +61,14 @@
                                     <ColumnDefinition Width="6*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Content="Count:" FontSize="15" Background="{StaticResource ElementWindowBrush}" Foreground="{StaticResource BackgroundWindowBrush}"/>
-                                <TextBox Grid.Column="1" Margin="3" BorderThickness="1" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
+                                <TextBox Grid.Column="1" Text="{Binding NewCount, UpdateSourceTrigger=PropertyChanged}" Margin="3" BorderThickness="1" FontWeight="DemiBold" VerticalAlignment="Center" FontSize="16"/>
                                 <Slider Grid.Column="2" 
+                                        Value="{Binding NewCount, UpdateSourceTrigger=PropertyChanged}"
+                                        Maximum="{Binding CurrentCount, UpdateSourceTrigger=PropertyChanged}"
                                         BorderThickness="1"
                                         FontWeight="DemiBold" 
                                         VerticalAlignment="Center"
-                                        Minimum="1"
+                                        Minimum="0"
                                         FontSize="16"/>
                             </Grid>
                         </Border>
@@ -75,7 +77,13 @@
                             <Button Margin="6" Content="Add" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                             <Button Margin="6" Content="Remove" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
                         </UniformGrid>
+                        
                         <Button Margin="6" Height="30" Content="Confirm" Style="{StaticResource LoginButton}" Background="{StaticResource ElementWindowBrush}"/>
+
+                        <UniformGrid Margin="20" Background="{StaticResource ElementWindowBrush}" Columns="2">
+                            <Label Content="Final cost:" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
+                            <TextBlock Text="{Binding FinalCost}" Foreground="{StaticResource BackgroundWindowBrush}" FontSize="20" FontWeight="DemiBold"/>
+                        </UniformGrid>
                     </StackPanel>
                 </Grid>
             </Border>

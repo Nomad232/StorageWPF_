@@ -97,7 +97,10 @@ namespace StorageWPF.ViewModels
                         };
                         break;
                     case "Expense invoice":
-                        _pageCache[page] = new ExpenseInvoicePage();
+                        _pageCache[page] = new ExpenseInvoicePage()
+                        {
+                            DataContext = new ExpenseInvoiceViewModel(Products)
+                        };
                         break;
                 }
             }
