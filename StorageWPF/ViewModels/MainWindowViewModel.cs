@@ -104,9 +104,10 @@ namespace StorageWPF.ViewModels
                         break;
                 }
             }
-            //Проблема з копією
+           
             if (page =="Expense invoice" )
             {
+                //Для вирішення проблеми з копією
                 _pageCache[page] = new ExpenseInvoicePage()
                 {
                     DataContext = new ExpenseInvoiceViewModel(Products)

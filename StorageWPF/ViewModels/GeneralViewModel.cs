@@ -15,32 +15,41 @@ namespace StorageWPF.ViewModels
     internal class GeneralViewModel : ViewModel
     {
         public string[] CombinedLabels => Labels.Zip(Units, (label, unit) => $"{label} ({unit})").ToArray();
-
-
+        public double[] ValuesOfSum => Products?.OrderBy(x => x.Count).Select(e => e.Sum).ToArray();
         public string[] Labels => Products?.OrderBy(x=> x.Count).Select(e => e.Name).ToArray();
-        public double[] Values => Products?.OrderBy(x => x.Count).Select(e => (double)e.Count).ToArray();
+        public double[] ValuesOfCount => Products?.OrderBy(x => x.Count).Select(e => (double)e.Count).ToArray();
         public Units_Of_Measurement[] Units => Products?.OrderBy(x => x.Count).Select(e => e.UM).ToArray();
         public ObservableCollection<Product> Products { get; set; }
         public GeneralViewModel(ObservableCollection<Product> products)
         {
             Products = products;
-            OnPropertyChanged("Lables");
-            OnPropertyChanged("Values");
 
-            PlotModel = new PlotModel { Title = "Quantity graph" };
+            PlotModelSum = new PlotModel { Title = "Total Cost Graph" };
+            PlotModelCount = new PlotModel { Title = "Quantity Graph" };
 
             StartAsyncUpdate();
         }
 
-        private PlotModel _plotModel;
+        private PlotModel _plotModelCount;
+        private PlotModel _plotModelSum;
 
-        public PlotModel PlotModel
+        public PlotModel PlotModelCount
         {
-            get => _plotModel;
+            get => _plotModelCount;
             set
             {
-                _plotModel = value;
-                OnPropertyChanged(nameof(PlotModel));
+                _plotModelCount = value;
+                OnPropertyChanged(nameof(PlotModelCount));
+            }
+        }
+
+        public PlotModel PlotModelSum
+        {
+            get => _plotModelSum;
+            set
+            {
+                _plotModelSum = value;
+                OnPropertyChanged(nameof(PlotModelSum));
             }
         }
 
@@ -48,34 +57,66 @@ namespace StorageWPF.ViewModels
         {
             while (true)
             {
-                UpdatePlot();
+                UpdatePlotSum();
+                UpdatePlotCount();
                 await Task.Delay(5000);
             }
         }
 
-        private void UpdatePlot()
+        private void UpdatePlotCount()
         {
-            PlotModel.Series.Clear();
-            PlotModel.Axes.Clear();
+            PlotModelCount.Series.Clear();
+            PlotModelCount.Axes.Clear();
 
             var barSeries = new BarSeries
             {
                 FontSize = 15,
-                ItemsSource = Values.Select(value => new BarItem { Value = value }).ToList(),
+                ItemsSource = ValuesOfCount.Select(value => new BarItem { Value = value }).ToList(),
                 LabelPlacement = LabelPlacement.Inside,
                 LabelFormatString = "{0}",
-                TrackerFormatString = "{0}",
             };
 
-            PlotModel.Series.Add(barSeries);
+            PlotModelCount.Series.Add(barSeries);
 
-            PlotModel.Axes.Add(new CategoryAxis
+            PlotModelCount.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Left,
                 ItemsSource = CombinedLabels
             });
 
-            PlotModel.Axes.Add(new LinearAxis
+            PlotModelCount.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                MinimumPadding = 0.1,
+                MaximumPadding = 0.1,
+                Title = "Quantity"
+            });
+
+            PlotModelCount.InvalidatePlot(true);
+        }
+
+        private void UpdatePlotSum()
+        {
+            PlotModelSum.Series.Clear();
+            PlotModelSum.Axes.Clear();
+
+            var barSeries = new BarSeries
+            {
+                FontSize = 15,
+                ItemsSource = ValuesOfSum.Select(value => new BarItem { Value = value }).ToList(),
+                LabelPlacement = LabelPlacement.Inside,
+                LabelFormatString = "{0:0.00}",
+            };
+
+            PlotModelSum.Series.Add(barSeries);
+
+            PlotModelSum.Axes.Add(new CategoryAxis
+            {
+                Position = AxisPosition.Left,
+                ItemsSource = CombinedLabels
+            });
+
+            PlotModelSum.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
                 MinimumPadding = 0.1, 
@@ -83,7 +124,7 @@ namespace StorageWPF.ViewModels
                 Title = "Quantity"      
             });
 
-            PlotModel.InvalidatePlot(true);
+            PlotModelSum.InvalidatePlot(true);
         }
 
     }
