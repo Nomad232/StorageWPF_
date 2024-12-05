@@ -15,22 +15,24 @@ namespace StorageWPF.ViewModels
         private Product _selectedProduct;
         private int _newCount = 0;
         private ObservableCollection<Product> _products;
-        public ObservableCollection<Product> CopyProducts => CreateNewCopyOfProducts();
+        public ObservableCollection<Product> CopyProducts { get; set; }
         public ObservableCollection<Product> NewProducts { get; set; }
 
         public ExpenseInvoiceViewModel(ObservableCollection<Product> products)
         {
             _products = products;
             NewProducts = new ObservableCollection<Product>();
+            CopyProducts = CreateNewCopyOfProducts();
         }
 
         public ExpenseInvoiceViewModel()
         {
             _products = new ObservableCollection<Product>();
             NewProducts = new ObservableCollection<Product>();
+            CopyProducts = CreateNewCopyOfProducts();
         }
 
-        private ObservableCollection<Product> CreateNewCopyOfProducts()
+        public ObservableCollection<Product> CreateNewCopyOfProducts()
         {
             return new ObservableCollection<Product>(
             _products.Select(product => new Product
@@ -40,7 +42,7 @@ namespace StorageWPF.ViewModels
                 Dt = product.Dt,
                 Count = product.Count,
                 UM = product.UM,
-            }));
+            }));    
         }
 
         public Product SelectedProductForRemove
@@ -183,7 +185,7 @@ namespace StorageWPF.ViewModels
                     {
                         if (_selectedProductForRemove != null)
                         {
-                            var queue = CopyProducts.First(x => x.Name == _selectedProduct.Name && x.UM == _selectedProduct.UM);
+                            var queue = CopyProducts.First(x => x.Name == _selectedProductForRemove.Name && x.UM == _selectedProductForRemove.UM);
                             queue.Count += _selectedProductForRemove.Count;
                             NewProducts.Remove(_selectedProductForRemove);
 
@@ -211,7 +213,7 @@ namespace StorageWPF.ViewModels
 
                             
                             var mergedProducts = filteredProducts
-                                .Union(NewProducts, new ProductComparerInvoice())
+                                .Union(NewProducts, new ProductComparerRemove())
                                 .ToList();
 
                             _products.Clear();

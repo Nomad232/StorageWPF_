@@ -58,8 +58,6 @@ namespace StorageWPF.ViewModels
             PlotModel.Series.Clear();
             PlotModel.Axes.Clear();
 
-
-            // Создание серии данных
             var barSeries = new BarSeries
             {
                 FontSize = 15,
@@ -69,26 +67,22 @@ namespace StorageWPF.ViewModels
                 TrackerFormatString = "{0}",
             };
 
-            // Добавление серии на график
             PlotModel.Series.Add(barSeries);
 
-            // Настройка оси Y (категорийная ось с метками)
             PlotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Left,
                 ItemsSource = CombinedLabels
             });
 
-            // Настройка оси X (числовая ось для значений)
             PlotModel.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-                MinimumPadding = 0.1, // Дополнительное пространство слева
-                MaximumPadding = 0.1, // Дополнительное пространство справа
-                Title = "Quantity"      // Подпись оси X
+                MinimumPadding = 0.1, 
+                MaximumPadding = 0.1, 
+                Title = "Quantity"      
             });
 
-            // Обновление графика
             PlotModel.InvalidatePlot(true);
         }
 

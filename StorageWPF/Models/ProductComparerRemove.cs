@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StorageWPF.Models
 {
-    public class ProductComparerInvoice : IEqualityComparer<Product>
+    public class ProductComparerRemove : IEqualityComparer<Product>
     {
         public bool Equals(Product x, Product y)
         {
