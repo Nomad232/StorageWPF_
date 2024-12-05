@@ -104,6 +104,17 @@ namespace StorageWPF.ViewModels
                         break;
                 }
             }
+           
+            if (page =="Expense invoice" )
+            {
+                //Для вирішення проблеми з копією
+                _pageCache[page] = new ExpenseInvoicePage()
+                {
+                    DataContext = new ExpenseInvoiceViewModel(Products)
+                };
+                CurrentPage = _pageCache[page];
+                return;
+            }
 
             CurrentPage = _pageCache[page];
         }
