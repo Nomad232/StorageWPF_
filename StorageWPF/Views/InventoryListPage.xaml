@@ -49,7 +49,7 @@
                     </Border>
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <TextBlock Text="Filter:" FontSize="25" Foreground="White"/>
+                        <TextBlock Text="Sort:" FontSize="25" Foreground="White"/>
                         <ComboBox Width="120" 
                                   ItemsSource="{Binding Filters}"
                                   SelectedItem="{Binding SelectedFilter}"
