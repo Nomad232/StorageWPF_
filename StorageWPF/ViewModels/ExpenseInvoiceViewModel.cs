@@ -69,15 +69,6 @@ namespace StorageWPF.ViewModels
             }
         }
 
-        public string CurrentName
-        {
-            get => _selectedProduct.Name;
-            set
-            {
-                _selectedProduct.Name = value;
-                OnPropertyChanged(nameof(CurrentName));
-            }
-        }
 
         public int NewCount
         {

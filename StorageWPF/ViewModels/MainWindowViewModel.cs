@@ -50,7 +50,6 @@ namespace StorageWPF.ViewModels
             }
         }
 
-        //знач за замовч General
         private Page _currentPage;
         public Page CurrentPage
         {
