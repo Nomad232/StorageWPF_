@@ -177,6 +177,7 @@ namespace StorageWPF.ViewModels
                     {
                         if (DeliveryProducts.Count > 0)
                         {
+                            //додавання продуктів
                             var mergedProducts = _products
                                                 .Union(DeliveryProducts, new ProductComparer())
                                                 .ToList();

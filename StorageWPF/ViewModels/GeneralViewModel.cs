@@ -14,7 +14,7 @@ namespace StorageWPF.ViewModels
 {
     internal class GeneralViewModel : ViewModel
     {
-        public string[] CombinedLabels => Labels.Zip(Units, (label, unit) => $"{label} ({unit})").ToArray();
+        public string[] CombinedLabels => Labels.Zip(Units, (label, unit) => $"{label} ({unit})").ToArray();  //комбінує значення з двох масивів
         public double[] ValuesOfSum => Products?.OrderBy(x => x.Count).Select(e => e.Sum).ToArray();
         public string[] Labels => Products?.OrderBy(x=> x.Count).Select(e => e.Name).ToArray();
         public double[] ValuesOfCount => Products?.OrderBy(x => x.Count).Select(e => (double)e.Count).ToArray();
@@ -68,11 +68,11 @@ namespace StorageWPF.ViewModels
             PlotModelCount.Series.Clear();
             PlotModelCount.Axes.Clear();
 
-            var barSeries = new BarSeries
+            var barSeries = new BarSeries //стовпчата діаграма
             {
                 FontSize = 15,
-                ItemsSource = ValuesOfCount.Select(value => new BarItem { Value = value }).ToList(),
-                LabelPlacement = LabelPlacement.Inside,
+                ItemsSource = ValuesOfCount.Select(value => new BarItem { Value = value }).ToList(), //значення стовпців
+                LabelPlacement = LabelPlacement.Inside,                                              //підпис в середині стовпця
                 LabelFormatString = "{0}",
             };
 
@@ -92,7 +92,7 @@ namespace StorageWPF.ViewModels
                 Title = "Quantity"
             });
 
-            PlotModelCount.InvalidatePlot(true);
+            PlotModelCount.InvalidatePlot(true);   //динамічне оновлення інформації
         }
 
         private void UpdatePlotSum()
@@ -103,8 +103,8 @@ namespace StorageWPF.ViewModels
             var barSeries = new BarSeries
             {
                 FontSize = 15,
-                ItemsSource = ValuesOfSum.Select(value => new BarItem { Value = value }).ToList(),
-                LabelPlacement = LabelPlacement.Inside,
+                ItemsSource = ValuesOfSum.Select(value => new BarItem { Value = value }).ToList(), 
+                LabelPlacement = LabelPlacement.Inside,                                            
                 LabelFormatString = "{0:0.00}",
             };
 

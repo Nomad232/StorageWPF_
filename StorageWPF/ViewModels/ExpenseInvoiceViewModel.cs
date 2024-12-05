@@ -16,7 +16,7 @@ namespace StorageWPF.ViewModels
         private int _newCount = 0;
         private ObservableCollection<Product> _products;
         public ObservableCollection<Product> CopyProducts { get; set; }
-        public ObservableCollection<Product> NewProducts { get; set; }
+        public ObservableCollection<Product> NewProducts { get; set; } //товари для вивозу
         public ExpenseInvoiceViewModel()
         {
             _products = new ObservableCollection<Product>();
@@ -106,6 +106,7 @@ namespace StorageWPF.ViewModels
             }
         }
 
+        //Перевірка коректності даних
         private bool CheckFields()
         {
             var errors = new List<string>();
@@ -125,6 +126,7 @@ namespace StorageWPF.ViewModels
             return true;
         }
 
+        //Вартість товарів, які вивозять
         public string FinalCost => NewProducts.Sum(x => x.Sum).ToString("f2");
 
         private RelayCommand _addCommand;
@@ -198,12 +200,13 @@ namespace StorageWPF.ViewModels
                     (_confirmCommand = new RelayCommand(obj =>
                     {
                         if (NewProducts.Count > 0)
-                        {                          
+                        {                   
+                            //товари, що залишились (крім тих, що вивезли повністю)
                             var filteredProducts = _products
                                 .Where(p => !NewProducts.Any(np => np.Count == p.Count))
                                 .ToList();
 
-                            
+                            //Віднімаємо кількість яку вивезли
                             var mergedProducts = filteredProducts
                                 .Union(NewProducts, new ProductComparerRemove())
                                 .ToList();
@@ -211,13 +214,12 @@ namespace StorageWPF.ViewModels
                             _products.Clear();
                             foreach (var product in mergedProducts)
                             {
-                                _products.Add(product);
+                                _products.Add(product); //Оновлений список предметів
                             }
 
 
                             MessageBox.Show("The products have been sent successfully");
-                            NewProducts.Clear();
-                            
+                            NewProducts.Clear();                            
                             
 
                             JsonUtils.ToJsonFile(_products, typeof(Product));

@@ -37,7 +37,7 @@ namespace StorageWPF.Models
                 }
 
                 // Серіалізація об'єкта в JSON
-                string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+                string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true }); // формат запису
 
                 // Запис JSON у файл
                 File.WriteAllText(path, json);
@@ -68,7 +68,7 @@ namespace StorageWPF.Models
             {
                 if (!File.Exists(path))
                 {
-                    return default;
+                    return default;  //поверне значення за замовчуванням для типу T
                 }
 
                 // Читання JSON із файлу

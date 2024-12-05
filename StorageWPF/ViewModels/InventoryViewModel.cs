@@ -28,6 +28,7 @@ namespace StorageWPF.ViewModels
             UpdateTable();
         }
 
+        //Оновлення таблиці (додавання\видалення)
         private async Task UpdateTable()
         {
             while (true)
