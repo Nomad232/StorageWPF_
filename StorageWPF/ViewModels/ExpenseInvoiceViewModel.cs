@@ -17,6 +17,12 @@ namespace StorageWPF.ViewModels
         private ObservableCollection<Product> _products;
         public ObservableCollection<Product> CopyProducts { get; set; }
         public ObservableCollection<Product> NewProducts { get; set; }
+        public ExpenseInvoiceViewModel()
+        {
+            _products = new ObservableCollection<Product>();
+            NewProducts = new ObservableCollection<Product>();
+            CopyProducts = CreateNewCopyOfProducts();
+        }
 
         public ExpenseInvoiceViewModel(ObservableCollection<Product> products)
         {
@@ -25,13 +31,7 @@ namespace StorageWPF.ViewModels
             CopyProducts = CreateNewCopyOfProducts();
         }
 
-        public ExpenseInvoiceViewModel()
-        {
-            _products = new ObservableCollection<Product>();
-            NewProducts = new ObservableCollection<Product>();
-            CopyProducts = CreateNewCopyOfProducts();
-        }
-
+        
         public ObservableCollection<Product> CreateNewCopyOfProducts()
         {
             return new ObservableCollection<Product>(
@@ -69,7 +69,7 @@ namespace StorageWPF.ViewModels
             }
         }
 
-
+        //Обрана кількість
         public int NewCount
         {
             get => _newCount;
@@ -91,7 +91,8 @@ namespace StorageWPF.ViewModels
             }
         }
 
-        public int CurrentCount
+        //Кількість одиниць товару
+        public int CurrentCount     
         {
             get
             {

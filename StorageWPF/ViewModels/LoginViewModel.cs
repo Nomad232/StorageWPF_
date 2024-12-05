@@ -39,8 +39,8 @@ namespace StorageWPF.ViewModels
                           {
                               MainWindow mainWindow = new MainWindow();
                               mainWindow.DataContext = new MainWindowViewModel(false, _username);
-                              var currentWindow = Application.Current.Windows.OfType<Window>()
-                          .FirstOrDefault(w => w.IsActive);
+                              var currentWindow = Application.Current.Windows.OfType<Window>() //колекція вікон програми
+                          .FirstOrDefault(w => w.IsActive);                                    //вибирається поточне вікно
                               currentWindow?.Close();
                               mainWindow.Show();
                           }
